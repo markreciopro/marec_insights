@@ -187,21 +187,115 @@
         display: block !important;
     }
 }
+      /* ================= MAREC HR360 HERO ================= */
+.marec-hero {
+    position: relative;
+    overflow: hidden;
+    border: 2px solid var(--accent-purple);
+    margin-top: 60px;
+    background-color: #0d1117;
+}
+
+.marec-bg {
+    position: absolute;
+    inset: 0;
+    background: url('https://raw.githubusercontent.com/markreciopro/marec_insights/main/IMG_20260330_155520691_HDR.jpg');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.35;
+    filter: blur(2px) brightness(0.7);
+    z-index: 0;
+}
+
+.marec-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.marec-logo {
+    width: 160px;
+    margin: 20px 0;
+    filter:
+        drop-shadow(0 0 20px rgba(188,140,255,0.9))
+        drop-shadow(0 0 40px rgba(188,140,255,0.5));
+    transform: scale(1.05);
+}
+
+.marec-glass {
+    max-width: 700px;
+    margin: 20px auto;
+    padding: 30px;
+    background: rgba(13,17,23,0.55);
+    backdrop-filter: blur(14px);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    box-shadow:
+        0 0 25px rgba(88,166,255,0.15),
+        inset 0 0 10px rgba(255,255,255,0.05);
+}
+
+.marec-glass h2 {
+    color: var(--accent-purple);
+    font-family: 'Fira Code';
+}
+
+.marec-glass p {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: #e6edf3;
+}
+      #hero {
+    position: relative;
+    z-index: 2;
+}
     </style>
+  
 </head>
 <body>
 
 <div class="container">
 
     <header class="reveal" id="hero">
-        <h1>MARK_RECIO, MBA</h1>
-        <div class="job-title" id="typewriter"></div>
-        <div style="margin-top: 25px;">
-            
-        </div>
+
+<div style="max-width:700px; margin:auto; text-align:center;">
+
+    <h1>MARK_RECIO, MBA</h1>
+
+    <div class="job-title" id="typewriter"></div>
+
+    <!-- HERO STATEMENT -->
+    <p style="
+        margin-top:20px;
+        font-size:1.2rem;
+        color:#e6edf3;
+        line-height:1.6;
+    ">
+        Turn fragmented workforce data into a 
+        <span style="color:var(--accent-cyan); font-weight:bold;">
+        real-time intelligence system
+        </span>
+        that drives smarter, faster decisions.
+    </p>
+
+    <!-- CTA BUTTONS -->
+    <div style="margin-top:25px;">
+        <a href="#contact" class="btn btn-cta">BOOK STRATEGY SESSION</a>
+
+        <a href="https://markreciopro.github.io/marec_hr360/" 
+           target="_blank"
+           class="btn"
+           style="margin-left:10px; border:1px solid var(--border); color:#fff;">
+           VIEW PLATFORM DEMO
+        </a>
+    </div>
+
+</div>
+
+</header>
   
-  
-  </header>
 
     <section class="section-card pitch-block reveal" id="value-proposition" style="position: relative; overflow: hidden; padding: 40px 30px;">
     
@@ -306,7 +400,7 @@ MAREC Insights is built on a full-cycle intelligence model:
 </p>
 
 <p style="font-family:'Fira Code'; color:var(--accent-purple); margin-top:15px;">
-DATA → INSIGHT → PREDICTION → AUTOMATION → SOFTWARE
+DATA → INSIGHT → PREDICTION → AUTOMATION → SCALABLE INTELLIGENCE SOFTWARE
 </p>
 
 <p style="font-size:0.85rem; opacity:0.8;">
@@ -480,66 +574,49 @@ $6K – $12K
 
   </div>
 <!-- ===================== STAGE 05: SOFTWARE PLATFORM ===================== -->
-<section class="section-card reveal" 
-style="
-    border:2px solid var(--accent-purple);
-    margin-top:60px;
-    position: relative;
-    overflow: hidden;
-    background-color: #0d1117;
-">
+<section class="section-card reveal marec-hero">
 
-    <!-- Background Image Layer -->
-    <div style="
-        position:absolute;
-        inset:0;
-        background:url('https://raw.githubusercontent.com/markreciopro/marec_insights/main/IMG_20260330_155520691_HDR.jpg');
-        background-size: contain;
-        background-position: center;
-        background-repeat: no-repeat;
-        opacity:0.25;
-        z-index:0;
-    "></div>
+    <!-- Background Layer -->
+    <div class="marec-bg"></div>
 
-    <!-- Content Layer -->
-    <div style="position:relative; z-index:1;">
-<div class="container" style="max-width:1000px; margin:auto; text-align:center;">
+    <!-- Content -->
+    <div class="marec-content container">
 
-<span class="pitch-tag">STAGE 05: SOFTWARE PLATFORM</span>
+        <span class="pitch-tag">STAGE 05: SOFTWARE PLATFORM</span>
 
-<!-- 🔥 PRODUCT LOGO -->
-<img src="https://raw.githubusercontent.com/markreciopro/marec_hr360/main/Marec%20HR360.png" 
-alt="MAREC HR360 Platform Logo"
-style="width:130px; margin:20px 0; filter: drop-shadow(0 0 20px rgba(188,140,255,0.7));">
+        <!-- LOGO (ENHANCED VISIBILITY) -->
+        <img 
+            src="https://raw.githubusercontent.com/markreciopro/marec_hr360/main/Marec%20HR360.png"
+            alt="MAREC HR360 Platform Logo"
+            class="marec-logo"
+        >
 
-<h2 style="color:var(--accent-purple); font-family:'Fira Code'; margin-bottom:10px;">
-Full-Stack Software Development Platform
+        <!-- GLASS TEXT BOX -->
+        <div class="marec-glass">
+
+<h2>
+    Full-Stack HR Intelligence Platform
 </h2>
 
-<p style="font-size:1rem; max-width:750px; margin:auto; line-height:1.8; opacity:0.9;">
-This is where strategy, analytics, and technology converge.
- </p>
- 
-<br><br>
-
-<p style="color: #e0e0e0; line-height: 1.8; font-size: 1.1rem; max-width: 800px;">
-    <span class="marec-highlight" style="color: var(--accent-cyan); font-weight: bold;">MAREC Insights</span> 
-    serves as the diagnostic layer, solving immediate data friction through high-impact, tailored solutions. 
+<p>
+    <b>MAREC HR360</b> is a platform blueprint that can be 
+    <b>customized to align with your business model</b> and modern, innovative HR demands.
     <br><br>
-    The <b>MAREC HR360</b> platform then elevates these solutions into a <b>scalable, real-time intelligence system</b>. 
-    It acts as the primary <b>articulation of your organizational needs</b>—integrating complex workforce requirements, 
-    predictive analytics, and intelligent automation into a unified, high-performance ecosystem. This transition 
-    ensures that your strategic goals are not just visualized, but fully operationalized through clean, 
-    MBA-led software architecture.
+    By combining workforce analytics, predictive insights, and automation, it delivers a 
+    scalable system that evolves with your organization.
 </p>
 
-<!-- 🚀 CTA -->
-<div style="margin-top:25px;">
-<a href="https://markreciopro.github.io/marec_hr360/" target="_blank"
-class="btn btn-cta">
-LAUNCH_PLATFORM
-</a>
-</div>
+            <a href="https://markreciopro.github.io/marec_hr360/" 
+               target="_blank" 
+               class="btn btn-cta">
+               LAUNCH_PLATFORM
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
 
 <!-- 📊 COMPARISON -->
 <div style="margin-top:45px; text-align:left;">
@@ -561,39 +638,43 @@ HOW YOUR ORGANIZATION EVOLVES
 <tbody>
 <tr>
 <td><b>Approach</b></td>
-<td>Unified intelligence platform</td>
-<td>Custom-built solutions</td>
+<td>Scalable HR intelligence platform aligned to your business model</td>
+<td>Custom-built solutions for targeted challenges</td>
 </tr>
 
 <tr>
 <td><b>What You Get</b></td>
-<td>Always-on dashboards, automation, and predictive insights</td>
-<td>Targeted solutions for immediate business challenges</td>
+<td>Integrated analytics, automation, and predictive workforce intelligence</td>
+<td>Focused solutions delivering immediate clarity</td>
 </tr>
 
 <tr>
 <td><b>Time to Impact</b></td>
-<td>Continuous real-time intelligence</td>
-<td>Fast implementation → quick results</td>
+<td>Continuous real-time insights and system evolution</td>
+<td>Rapid implementation with quick wins</td>
 </tr>
 
 <tr>
 <td><b>Scalability</b></td>
-<td style="color:var(--accent-green); font-weight:bold;">Grows with your organization</td>
-<td style="color:var(--accent-cyan); font-weight:bold;">Addresses targeted business challenges efficiently</td>
+<td style="color:var(--accent-green); font-weight:bold;">
+Adapts and scales with your organization’s growth and HR innovation needs
+</td>
+<td style="color:var(--accent-cyan); font-weight:bold;">
+Solves immediate needs with flexible, targeted execution
+</td>
 </tr>
 
 <tr>
 <td><b>Best For</b></td>
-<td>Organizations scaling operations and building long-term systems</td>
-<td>Immediate clarity and short-term wins</td>
+<td>Organizations building long-term, intelligent HR ecosystems</td>
+<td>Teams seeking immediate insights and operational improvements</td>
 </tr>
 </tbody>
 </table>
 </div>
 
 <p style="font-size:0.75rem; color:var(--accent-green); margin-top:12px; font-family:'Fira Code'; text-align:center;">
-→ Start with solutions. Scale into a platform.
+→ Start with solutions. Evolve into a fully articulated HR intelligence platform.
 </p>
 
 </div>
@@ -606,58 +687,111 @@ BUSINESS OUTCOME
 </h4>
 
 <p style="font-size:0.9rem; line-height:1.7;">
-A <b>production-ready SaaS platform</b> that transforms your organization into a 
-<b>real-time intelligence-driven operation</b>.
+A <b>customizable HR intelligence platform</b> designed to align with your business model and 
+support modern, innovative workforce strategies.
 
 <br><br>
 
-• Automated analytics  
-• Predictive decision models  
-• Real-time dashboards  
-• Scalable cloud architecture  
+• Unified workforce analytics  
+• Predictive HR and operational modeling  
+• Intelligent automation systems  
+• Scalable, cloud-ready architecture  
 
 <br><br>
 
-Result: <b>Operate with continuous intelligence—not delayed reports.</b>
+Result: <b>Operate with continuous, data-driven intelligence tailored to your organization.</b>
 </p>
 
 </div>
+<!-- ================= PROVEN IMPACT ================= -->
+<h2 class="section-title">Proven Impact</h2>
 
+<div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:20px; margin-top:20px;">
+
+<div class="price-box">
+<b style="color:var(--accent-green); font-size:1.5rem;">50%+</b><br>
+Manual reporting reduction<br>
+<span style="font-size:0.7rem; opacity:0.7;">via automated dashboards</span>
+</div>
+
+<div class="price-box">
+<b style="color:var(--accent-cyan); font-size:1.5rem;">3x</b><br>
+Faster decision-making<br>
+<span style="font-size:0.7rem; opacity:0.7;">real-time intelligence</span>
+</div>
+
+<div class="price-box">
+<b style="color:var(--accent-purple); font-size:1.5rem;">100%</b><br>
+Centralized data visibility<br>
+<span style="font-size:0.7rem; opacity:0.7;">single source of truth</span>
+</div>
+
+</div>
 <!-- 💰 PRICING TIERS -->
 <div style="margin-top:40px; display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:20px;">
 
 <div class="price-box">
 <b style="color:var(--accent-cyan);">STARTER PLATFORM</b><br><br>
+
+<span style="font-size:0.75rem; opacity:0.8;">
+Foundation system tailored to your business model
+</span><br><br>
+
 $12K – $20K Build<br>
 <span style="font-size:0.7rem;">$99 – $199/mo</span><br><br>
+
 <span style="font-size:0.75rem; opacity:0.8;">
-Core dashboards + automation + reporting
+• Core workforce dashboards<br>
+• Automated reporting workflows<br>
+• Centralized data visibility<br>
+• Entry-level HR intelligence system
 </span>
 </div>
+
 
 <div class="price-box" style="border-color:var(--accent-purple);">
 <b style="color:var(--accent-purple);">GROWTH PLATFORM</b><br><br>
+
+<span style="font-size:0.75rem; opacity:0.8;">
+Scalable system aligned to evolving HR innovation needs
+</span><br><br>
+
 $20K – $50K Build<br>
 <span style="font-size:0.7rem;">$199 – $399/mo</span><br><br>
+
 <span style="font-size:0.75rem; opacity:0.8;">
-Dashboards + predictive models + integrations
+• Predictive workforce analytics<br>
+• Advanced dashboards + integrations<br>
+• Process automation systems<br>
+• Cross-functional data insights
 </span>
 </div>
+
 
 <div class="price-box">
 <b style="color:var(--accent-green);">ENTERPRISE SYSTEM</b><br><br>
+
+<span style="font-size:0.75rem; opacity:0.8;">
+Fully articulated HR intelligence platform built for scale
+</span><br><br>
+
 $50K – $100K+ Build<br>
 <span style="font-size:0.7rem;">$399 – $999/mo</span><br><br>
+
 <span style="font-size:0.75rem; opacity:0.8;">
-Full automation + AI + custom infrastructure
+• Full automation + AI-driven insights<br>
+• Custom infrastructure & integrations<br>
+• Real-time decision intelligence systems<br>
+• Enterprise-grade scalability
 </span>
 </div>
 
 </div>
 
+
 <!-- ⚙️ STACK -->
 <span class="tech-stack" style="margin-top:15px;">
-STACK: React | FastAPI | Python | Power BI | APIs | Cloud Storage & Infrastructure | Mobile Ready | HR360 SaaS | PostgreSQL | Hybrid Top-Down & Bottom-Up Approach | Diagram Mapping
+STACK: React | FastAPI | Python | Power BI | APIs | Cloud Infrastructure | PostgreSQL | Automation Systems | Predictive Modeling | HR360 SaaS Architecture
 </span>
 
 </div>
