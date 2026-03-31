@@ -486,16 +486,23 @@ style="
     margin-top:60px;
     position: relative;
     overflow: hidden;
-
-    background:
-        linear-gradient(rgba(13,17,23,0.85), rgba(13,17,23,0.95)),
-        url('https://raw.githubusercontent.com/markreciopro/marec_insights/main/IMG_20260330_155520691_HDR.jpg');
-
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    background-color: #0d1117;
 ">
 
+    <!-- Background Image Layer -->
+    <div style="
+        position:absolute;
+        inset:0;
+        background:url('https://raw.githubusercontent.com/markreciopro/marec_insights/main/IMG_20260330_155520691_HDR.jpg');
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+        opacity:0.25;
+        z-index:0;
+    "></div>
+
+    <!-- Content Layer -->
+    <div style="position:relative; z-index:1;">
 <div class="container" style="max-width:1000px; margin:auto; text-align:center;">
 
 <span class="pitch-tag">STAGE 05: SOFTWARE PLATFORM</span>
@@ -511,7 +518,8 @@ Full-Stack Software Development Platform
 
 <p style="font-size:1rem; max-width:750px; margin:auto; line-height:1.8; opacity:0.9;">
 This is where strategy, analytics, and technology converge.
-
+ </p>
+ 
 <br><br>
 
 <p style="color: #e0e0e0; line-height: 1.8; font-size: 1.1rem; max-width: 800px;">
