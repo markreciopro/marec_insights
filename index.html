@@ -33,88 +33,533 @@
     
     <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/markreciopro/marec/main/logo.png">
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;700&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
-
     <script src='https://8x8.vc/vpaas-magic-cookie-0df9147ea04144c194c704c4538286ea/external_api.js' async></script>
 
     <style>
+        /* ============================================ */
+        /* CSS VARIABLES - THE FOUNDATION */
+        /* ============================================ */
         :root {
-            --bg-dark: #0d1117; 
-            --bg-card: rgba(22, 27, 34, 0.6); 
-            --accent-cyan: #58a6ff;    
-            --accent-green: #3fb950; 
-            --accent-gold: #f2c811; 
+            --bg-dark: #0d1117;
+            --bg-card: rgba(22, 27, 34, 0.6);
+            --accent-cyan: #58a6ff;
+            --accent-green: #3fb950;
+            --accent-gold: #f2c811;
             --accent-purple: #bc8cff;
-            --text-main: #c9d1d9;      
+            --accent-red: #f85149;
+            --text-main: #c9d1d9;
+            --text-bright: #e6edf3;
             --border: rgba(255, 255, 255, 0.1);
+            --border-bright: rgba(88, 166, 255, 0.3);
             --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-fast: all 0.2s ease-out;
         }
 
-        * { box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: var(--bg-dark); }
-        ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
+        /* ============================================ */
+        /* GLOBAL RESETS */
+        /* ============================================ */
+        * { 
+            box-sizing: border-box; 
+            margin: 0;
+            padding: 0;
+        }
 
-        body { 
-            font-family: 'Inter', sans-serif; 
-            line-height: 1.6; 
-            color: var(--text-main); 
-            margin: 0; 
-            background-color: var(--bg-dark); 
-            background-image: 
-                linear-gradient(rgba(13, 17, 23, 0.9), rgba(13, 17, 23, 0.9)),
+        html { 
+            scroll-behavior: smooth;
+        }
+
+        /* ============================================ */
+        /* SCROLLBAR STYLING */
+        /* ============================================ */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-dark);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(to bottom, var(--accent-cyan), var(--accent-purple));
+            border-radius: 10px;
+            border: 2px solid var(--bg-dark);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(to bottom, var(--accent-cyan), var(--accent-green));
+        }
+
+        /* ============================================ */
+        /* BODY & BACKGROUND */
+        /* ============================================ */
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-main);
+            background-color: var(--bg-dark);
+            background-image:
+                linear-gradient(135deg, rgba(13, 17, 23, 0.95) 0%, rgba(13, 17, 23, 0.92) 50%, rgba(13, 17, 23, 0.95) 100%),
                 url('https://i.ibb.co/ZzCVqzH9/Gemini-Generated-Image-bn1v5kbn1v5kbn1v.png');
             background-attachment: fixed;
             background-size: cover;
             background-position: center;
             overflow-x: hidden;
+            position: relative;
         }
 
-        .container { max-width: 1100px; margin: auto; padding: 0 20px; }
+        /* Animated background elements */
+        body::before {
+            content: '';
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 50%, rgba(88, 166, 255, 0.03) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 30%, rgba(188, 140, 255, 0.02) 0%, transparent 50%);
+            animation: drift 20s ease-in-out infinite;
+            z-index: 0;
+            pointer-events: none;
+        }
 
-        nav { padding: 30px 0; display: flex; justify-content: space-between; align-items: center;}
-        .pixel-logo { width: 130px; image-rendering: pixelated; filter: drop-shadow(0 0 5px rgba(88, 166, 255, 0.2)); transition: var(--transition); }
-        .pixel-logo:hover { filter: drop-shadow(0 0 15px var(--accent-cyan)); transform: scale(1.05); }
+        @keyframes drift {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(30px, -30px); }
+        }
 
-        header { text-align: center; padding: 100px 20px 60px 20px; }
-        h1 { margin: 0; font-size: clamp(2.2rem, 8vw, 3.8rem); font-family: 'Fira Code', monospace; color: #fff; letter-spacing: -2px; }
-        .job-title { font-size: 1rem; color: var(--accent-cyan); margin: 15px 0; font-family: 'Fira Code'; text-transform: uppercase; letter-spacing: 3px; min-height: 1.6em;}
-        #typewriter::after { content: '_'; animation: blink 1s infinite; }
-        @keyframes blink { 50% { opacity: 0; } }
+        /* ============================================ */
+        /* CONTAINER */
+        /* ============================================ */
+        .container {
+            max-width: 1100px;
+            margin: auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
 
-        .section-card { background: var(--bg-card); padding: 40px; border: 1px solid var(--border); border-radius: 12px; margin-bottom: 30px; backdrop-filter: blur(12px); transition: var(--transition); }
-        .pitch-block { border-left: 4px solid var(--accent-cyan); }
-        .pitch-tag { font-family: 'Fira Code'; font-size: 0.7rem; color: var(--accent-cyan); display: block; text-transform: uppercase; margin-bottom: 12px; }
+        /* ============================================ */
+        /* NAVIGATION */
+        /* ============================================ */
+        nav {
+            padding: 30px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(13, 17, 23, 0.4);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--border);
+            animation: slideDown 0.6s ease-out;
+        }
 
-        h2.section-title { font-family: 'Fira Code'; color: var(--accent-cyan); text-transform: uppercase; font-size: 1rem; border-bottom: 1px solid var(--border); padding-bottom: 10px; margin: 60px 0 30px 0; letter-spacing: 2px; }
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
-        .roadmap-wrapper { position: relative; max-width: 900px; margin: 50px auto; padding: 40px 0; }
-        .roadmap-wrapper::before { content: ''; position: absolute; left: 50%; top: 0; width: 2px; height: 100%; background: rgba(255, 255, 255, 0.1); transform: translateX(-50%); }
-        .roadmap-progress { position: absolute; left: 50%; top: 0; width: 2px; height: 0%; background: linear-gradient(to bottom, var(--accent-cyan), var(--accent-green)); transform: translateX(-50%); transition: height 0.1s linear; box-shadow: 0 0 15px var(--accent-cyan); }
-        .roadmap-step { position: relative; width: 100%; margin-bottom: 60px; display: flex; justify-content: space-between; align-items: center; }
-        .roadmap-step:nth-child(odd) { flex-direction: row-reverse; }
-        .roadmap-content { width: 45%; padding: 30px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; backdrop-filter: blur(10px); transition: var(--transition); position: relative; }
-        .roadmap-step.active .roadmap-content { border-color: var(--accent-cyan); transform: translateY(-10px); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
-        .roadmap-dot { position: absolute; left: 50%; width: 16px; height: 16px; background: var(--bg-dark); border: 2px solid var(--border); border-radius: 50%; transform: translateX(-50%); z-index: 2; transition: var(--transition); }
-        .roadmap-step.active .roadmap-dot { background: var(--accent-cyan); border-color: #fff; box-shadow: 0 0 15px var(--accent-cyan); }
-        
-        .roadmap-icon { width: 40px; height: 40px; margin-bottom: 15px; opacity: 0.6; transition: var(--transition); color: var(--accent-cyan); }
-        .roadmap-step.active .roadmap-icon { opacity: 1; transform: scale(1.1); filter: drop-shadow(0 0 8px var(--accent-cyan)); }
+        .pixel-logo {
+            width: 130px;
+            image-rendering: pixelated;
+            filter: drop-shadow(0 0 8px rgba(88, 166, 255, 0.4));
+            transition: var(--transition);
+            cursor: pointer;
+        }
 
-        .price-box { font-family: 'Fira Code'; font-weight: bold; background: rgba(0,0,0,0.3); padding: 12px; border-radius: 6px; text-align: center; margin-top: 15px; border: 1px solid var(--border); font-size: 0.85rem; }
-        .tech-stack { font-size: 0.65rem; color: var(--accent-purple); font-family: 'Fira Code'; margin-top: 8px; display: block; }
+        .pixel-logo:hover {
+            filter: drop-shadow(0 0 20px var(--accent-cyan)) brightness(1.2);
+            transform: scale(1.08) rotate(-2deg);
+        }
 
-        .table-container { overflow-x: auto; border-radius: 12px; border: 1px solid var(--border); background: rgba(0,0,0,0.1); margin-top: 20px; backdrop-filter: blur(4px); }
-        table { width: 100%; border-collapse: collapse; font-size: 0.85rem; min-width: 700px; }
-        th, td { padding: 18px; text-align: left; border-bottom: 1px solid var(--border); }
-        th { background: rgba(0,0,0,0.2); color: var(--accent-cyan); font-family: 'Fira Code'; font-size: 0.7rem; text-transform: uppercase; }
-        .highlight-col { background: rgba(88, 166, 255, 0.08); font-weight: bold; color: #fff; }
+        /* ============================================ */
+        /* HEADER / HERO */
+        /* ============================================ */
+        header {
+            text-align: center;
+            padding: 100px 20px 60px 20px;
+            position: relative;
+            z-index: 2;
+        }
 
-        .engagement-zone { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-bottom: 60px; align-items: stretch; }
-        .video-wrapper, .meeting-container { position: relative; height: 520px; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; background: #000; transition: var(--transition); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        .meeting-container { display: flex; flex-direction: column; background: var(--bg-dark); }
-        
+        h1 {
+            margin: 0;
+            font-size: clamp(2.2rem, 8vw, 3.8rem);
+            font-family: 'Fira Code', monospace;
+            color: #fff;
+            letter-spacing: -2px;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent-cyan) 0%, var(--accent-purple) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 0.8s ease-out;
+            text-shadow: 0 0 30px rgba(88, 166, 255, 0.2);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .job-title {
+            font-size: 1rem;
+            color: var(--accent-cyan);
+            margin: 15px 0;
+            font-family: 'Fira Code', monospace;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            min-height: 1.6em;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        #typewriter::after {
+            content: '_';
+            animation: blink 1s infinite;
+            color: var(--accent-cyan);
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* ============================================ */
+        /* SECTION CARDS - GLASSMORPHISM */
+        /* ============================================ */
+        .section-card {
+            background: rgba(22, 27, 34, 0.5);
+            padding: 40px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(12px);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 0.8s ease-out both;
+        }
+
+        .section-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 50%, rgba(88, 166, 255, 0.1) 0%, transparent 50%);
+            animation: rotate 20s linear infinite;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .section-card:hover {
+            border-color: var(--border-bright);
+            background: rgba(22, 27, 34, 0.7);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(88, 166, 255, 0.1);
+        }
+
+        .section-card > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .pitch-block {
+            border-left: 4px solid var(--accent-cyan);
+        }
+
+        .pitch-tag {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.7rem;
+            color: var(--accent-cyan);
+            display: block;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            animation: slideIn 0.6s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* ============================================ */
+        /* SECTION TITLES */
+        /* ============================================ */
+        h2.section-title {
+            font-family: 'Fira Code', monospace;
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+            font-size: 1rem;
+            border-bottom: 2px solid var(--border-bright);
+            padding-bottom: 10px;
+            margin: 60px 0 30px 0;
+            letter-spacing: 2px;
+            position: relative;
+            animation: fadeInUp 0.8s ease-out both;
+        }
+
+        h2.section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple), transparent);
+            animation: expandWidth 1s ease-out;
+        }
+
+        @keyframes expandWidth {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        /* ============================================ */
+        /* ROADMAP STYLING */
+        /* ============================================ */
+        .roadmap-wrapper {
+            position: relative;
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 40px 0;
+        }
+
+        .roadmap-wrapper::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            width: 2px;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(-50%);
+        }
+
+        .roadmap-progress {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            width: 2px;
+            height: 0%;
+            background: linear-gradient(to bottom, var(--accent-cyan), var(--accent-green));
+            transform: translateX(-50%);
+            transition: height 0.1s linear;
+            box-shadow: 0 0 15px var(--accent-cyan);
+            z-index: 2;
+        }
+
+        .roadmap-step {
+            position: relative;
+            width: 100%;
+            margin-bottom: 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            opacity: 0.6;
+            transition: var(--transition);
+        }
+
+        .roadmap-step:nth-child(odd) {
+            flex-direction: row-reverse;
+        }
+
+        .roadmap-step.active {
+            opacity: 1;
+        }
+
+        .roadmap-content {
+            width: 45%;
+            padding: 30px;
+            background: rgba(22, 27, 34, 0.6);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            transition: var(--transition);
+            position: relative;
+            z-index: 1;
+        }
+
+        .roadmap-step.active .roadmap-content {
+            border-color: var(--accent-cyan);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(88, 166, 255, 0.2);
+            background: rgba(22, 27, 34, 0.9);
+        }
+
+        .roadmap-dot {
+            position: absolute;
+            left: 50%;
+            width: 16px;
+            height: 16px;
+            background: var(--bg-dark);
+            border: 2px solid var(--border);
+            border-radius: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+            transition: var(--transition);
+            box-shadow: 0 0 0 6px rgba(88, 166, 255, 0.1);
+        }
+
+        .roadmap-step.active .roadmap-dot {
+            background: var(--accent-cyan);
+            border-color: #fff;
+            box-shadow: 0 0 20px var(--accent-cyan), inset 0 0 10px rgba(88, 166, 255, 0.3);
+        }
+
+        .roadmap-icon {
+            width: 40px;
+            height: 40px;
+            margin-bottom: 15px;
+            opacity: 0.6;
+            transition: var(--transition);
+            color: var(--accent-cyan);
+        }
+
+        .roadmap-step.active .roadmap-icon {
+            opacity: 1;
+            transform: scale(1.1);
+            filter: drop-shadow(0 0 8px var(--accent-cyan));
+        }
+
+        /* ============================================ */
+        /* PRICE BOX */
+        /* ============================================ */
+        .price-box {
+            font-family: 'Fira Code', monospace;
+            font-weight: bold;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 12px;
+            border-radius: 6px;
+            text-align: center;
+            margin-top: 15px;
+            border: 1px solid var(--border);
+            font-size: 0.85rem;
+            transition: var(--transition);
+        }
+
+        .price-box:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 15px rgba(88, 166, 255, 0.2);
+        }
+
+        .tech-stack {
+            font-size: 0.65rem;
+            color: var(--accent-purple);
+            font-family: 'Fira Code', monospace;
+            margin-top: 8px;
+            display: block;
+            opacity: 0.8;
+        }
+
+        /* ============================================ */
+        /* TABLE STYLING */
+        /* ============================================ */
+        .table-container {
+            overflow-x: auto;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            background: rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+            backdrop-filter: blur(4px);
+            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.3);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+            min-width: 700px;
+        }
+
+        th, td {
+            padding: 18px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            background: rgba(0, 0, 0, 0.3);
+            color: var(--accent-cyan);
+            font-family: 'Fira Code', monospace;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        tr:hover {
+            background: rgba(88, 166, 255, 0.05);
+            transition: var(--transition-fast);
+        }
+
+        .highlight-col {
+            background: rgba(88, 166, 255, 0.15);
+            font-weight: bold;
+            color: #fff;
+            border-left: 3px solid var(--accent-cyan);
+        }
+
+        /* ============================================ */
+        /* ENGAGEMENT ZONE */
+        /* ============================================ */
+        .engagement-zone {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-bottom: 60px;
+            align-items: stretch;
+        }
+
+        .video-wrapper, .meeting-container {
+            position: relative;
+            height: 520px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            background: #000;
+            transition: var(--transition);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            animation: fadeInUp 0.8s ease-out both;
+        }
+
+        .video-wrapper:hover, .meeting-container:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 20px 50px rgba(88, 166, 255, 0.2);
+        }
+
+        .meeting-container {
+            display: flex;
+            flex-direction: column;
+            background: var(--bg-dark);
+        }
+
         .jitsi-viewport {
             flex-grow: 1;
             overflow: hidden;
@@ -123,799 +568,681 @@
             height: 100%;
             background: #000;
         }
-        
+
         .jitsi-mask {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
-            height: 110px; 
+            height: 110px;
             background: #000;
             z-index: 5;
-            pointer-events: none; 
+            pointer-events: none;
             display: flex;
             justify-content: center;
             align-items: center;
         }
 
         .jitsi-overlay-logo {
-            height: 75px; 
+            height: 75px;
             width: auto;
-            margin-top: 15px; 
-            filter: drop-shadow(0 0 8px rgba(255,255,255,0.15));
+            margin-top: 15px;
+            filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.15));
         }
 
-        #jaas-container { 
-            width: 100%; 
-            height: 100%; 
-            transform: scale(1.05); 
-            transform-origin: top center; 
+        #jaas-container {
+            width: 100%;
+            height: 100%;
+            transform: scale(1.05);
+            transform-origin: top center;
             position: relative;
             z-index: 1;
         }
 
-        .meeting-header { padding: 12px 15px; background: rgba(0, 0, 0, 0.9); border-bottom: 1px solid var(--border); font-family: 'Fira Code'; font-size: 0.65rem; display: flex; justify-content: space-between; align-items: center; color: #fff; z-index: 10; position: relative; }
-        .status-dot { height: 8px; width: 8px; background: var(--accent-green); border-radius: 50%; display: inline-block; margin-right: 5px; animation: pulse 2s infinite; }
-
-        #contact { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin: 40px auto 100px auto; padding: 45px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; backdrop-filter: blur(15px); }
-        input, textarea { width: 100%; padding: 15px; background: rgba(13, 17, 23, 0.5); border: 1px solid var(--border); color: white; border-radius: 4px; margin-bottom: 20px; font-family: 'Inter', sans-serif; }
-        .btn { padding: 16px 32px; text-decoration: none; border-radius: 4px; font-weight: 700; font-family: 'Fira Code'; font-size: 0.75rem; text-transform: uppercase; transition: var(--transition); cursor: pointer; border: none; display: inline-block; text-align: center; }
-        .btn-cta { background: var(--accent-cyan); color: #0d1117; box-shadow: 0 4px 14px 0 rgba(88, 166, 255, 0.3); }
-        .btn:hover { transform: translateY(-3px); filter: brightness(1.2); }
-        .contact-link-btn { display: inline-block; margin-top: 10px; margin-right: 10px; padding: 8px 15px; border: 1px solid var(--border); border-radius: 4px; color: var(--accent-cyan); text-decoration: none; font-family: 'Fira Code'; font-size: 0.7rem; transition: var(--transition); background: rgba(88, 166, 255, 0.05); }
-
-        .reveal { opacity: 0; transform: translateY(30px); transition: 0.8s ease-out; }
-        .reveal.active { opacity: 1; transform: translateY(0); }
-
-        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
-
-        @media (max-width: 850px) { 
-            .engagement-zone, #contact { grid-template-columns: 1fr; text-align: center; } 
-            .meeting-container, .video-wrapper { height: 450px; }
-            h1 { font-size: 2.2rem; }
-            .roadmap-wrapper::before, .roadmap-progress, .roadmap-dot { left: 20px; transform: none; }
-            .roadmap-content { width: calc(100% - 50px); margin-left: 50px; }
-            .roadmap-step, .roadmap-step:nth-child(odd) { flex-direction: row; }
-            #jaas-container { transform: scale(1.1); }
+        .meeting-header {
+            padding: 12px 15px;
+            background: rgba(0, 0, 0, 0.9);
+            border-bottom: 1px solid var(--border);
+            font-family: 'Fira Code', monospace;
+            font-size: 0.65rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #fff;
+            z-index: 10;
+            position: relative;
         }
-      @media (max-width: 1024px) {
-    .canva-embed {
-        display: none !important;
-    }
 
-    .canva-mobile {
-        display: block !important;
-    }
-}
-      /* ================= MAREC HR360 HERO ================= */
-.marec-hero {
-    position: relative;
-    overflow: hidden;
-    border: 2px solid var(--accent-purple);
-    margin-top: 60px;
-    background-color: #0d1117;
-}
+        .status-dot {
+            height: 8px;
+            width: 8px;
+            background: var(--accent-green);
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 5px;
+            animation: pulse 2s infinite;
+        }
 
-.marec-bg {
-    position: absolute;
-    inset: 0;
-    background: url('https://raw.githubusercontent.com/markreciopro/marec_insights/main/IMG_20260330_155520691_HDR.jpg');
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-    opacity: 0.35;
-    filter: blur(2px) brightness(0.7);
-    z-index: 0;
-}
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
 
-.marec-content {
-    position: relative;
-    z-index: 2;
-    text-align: center;
-    padding: 60px 20px;
-}
+        /* ============================================ */
+        /* MARC HR360 HERO */
+        /* ============================================ */
+        .marec-hero {
+            position: relative;
+            overflow: hidden;
+            border: 2px solid var(--accent-purple);
+            margin-top: 60px;
+            background-color: #0d1117;
+            animation: fadeInUp 0.8s ease-out both;
+        }
 
-.marec-logo {
-    width: 160px;
-    margin: 20px 0;
-    filter:
-        drop-shadow(0 0 20px rgba(188,140,255,0.9))
-        drop-shadow(0 0 40px rgba(188,140,255,0.5));
-    transform: scale(1.05);
-}
+        .marec-bg {
+            position: absolute;
+            inset: 0;
+            background: url('https://raw.githubusercontent.com/markreciopro/marec_insights/main/IMG_20260330_155520691_HDR.jpg');
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.35;
+            filter: blur(2px) brightness(0.7);
+            z-index: 0;
+            animation: zoomIn 10s ease-in-out infinite;
+        }
 
-.marec-glass {
-    max-width: 700px;
-    margin: 20px auto;
-    padding: 30px;
-    background: rgba(13,17,23,0.55);
-    backdrop-filter: blur(14px);
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 12px;
-    box-shadow:
-        0 0 25px rgba(88,166,255,0.15),
-        inset 0 0 10px rgba(255,255,255,0.05);
-}
+        @keyframes zoomIn {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
 
-.marec-glass h2 {
-    color: var(--accent-purple);
-    font-family: 'Fira Code';
-}
+        .marec-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 60px 20px;
+        }
 
-.marec-glass p {
-    font-size: 1rem;
-    line-height: 1.8;
-    color: #e6edf3;
-}
-      #hero {
-    position: relative;
-    z-index: 2;
-}
+        .marec-logo {
+            width: 160px;
+            margin: 20px 0;
+            filter: drop-shadow(0 0 20px rgba(188, 140, 255, 0.9)) drop-shadow(0 0 40px rgba(188, 140, 255, 0.5));
+            transform: scale(1.05);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) scale(1.05); }
+            50% { transform: translateY(-10px) scale(1.08); }
+        }
+
+        .marec-glass {
+            max-width: 700px;
+            margin: 20px auto;
+            padding: 30px;
+            background: rgba(13, 17, 23, 0.6);
+            backdrop-filter: blur(14px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            box-shadow: 0 0 30px rgba(188, 140, 255, 0.2), inset 0 0 20px rgba(255, 255, 255, 0.03);
+            transition: var(--transition);
+        }
+
+        .marec-glass:hover {
+            border-color: var(--accent-purple);
+            box-shadow: 0 0 40px rgba(188, 140, 255, 0.4), inset 0 0 20px rgba(255, 255, 255, 0.05);
+        }
+
+        .marec-glass h2 {
+            color: var(--accent-purple);
+            font-family: 'Fira Code', monospace;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .marec-glass p {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: #e6edf3;
+        }
+
+        /* ============================================ */
+        /* CONTACT FORM */
+        /* ============================================ */
+        #contact {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin: 40px auto 100px auto;
+            padding: 45px;
+            background: rgba(22, 27, 34, 0.5);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            backdrop-filter: blur(15px);
+            animation: fadeInUp 0.8s ease-out both;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 15px;
+            background: rgba(13, 17, 23, 0.6);
+            border: 1px solid var(--border);
+            color: white;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            font-family: 'Inter', sans-serif;
+            transition: var(--transition-fast);
+        }
+
+        input:focus, textarea:focus {
+            background: rgba(13, 17, 23, 0.9);
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 15px rgba(88, 166, 255, 0.2);
+            outline: none;
+        }
+
+        /* ============================================ */
+        /* BUTTONS */
+        /* ============================================ */
+        .btn {
+            padding: 16px 32px;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 700;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+            display: inline-block;
+            text-align: center;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+            z-index: 0;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn-cta {
+            background: var(--accent-cyan);
+            color: #0d1117;
+            box-shadow: 0 4px 14px 0 rgba(88, 166, 255, 0.3);
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px 0 rgba(88, 166, 255, 0.5);
+            filter: brightness(1.1);
+        }
+
+        .btn-cta:active {
+            transform: translateY(-1px);
+        }
+
+        .contact-link-btn {
+            display: inline-block;
+            margin-top: 10px;
+            margin-right: 10px;
+            padding: 8px 15px;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            color: var(--accent-cyan);
+            text-decoration: none;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.7rem;
+            transition: var(--transition);
+            background: rgba(88, 166, 255, 0.05);
+        }
+
+        .contact-link-btn:hover {
+            background: rgba(88, 166, 255, 0.15);
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 15px rgba(88, 166, 255, 0.3);
+        }
+
+        /* ============================================ */
+        /* REVEAL ANIMATION */
+        /* ============================================ */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ============================================ */
+        /* FOOTER */
+        /* ============================================ */
+        footer {
+            text-align: center;
+            padding: 60px 20px;
+            color: #8b949e;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.7rem;
+            border-top: 1px solid var(--border);
+            margin-top: 100px;
+        }
+
+        /* ============================================ */
+        /* RESPONSIVE DESIGN */
+        /* ============================================ */
+        @media (max-width: 850px) {
+            .engagement-zone, #contact {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .meeting-container, .video-wrapper {
+                height: 450px;
+            }
+
+            h1 {
+                font-size: 2.2rem;
+            }
+
+            .roadmap-wrapper::before, .roadmap-progress, .roadmap-dot {
+                left: 20px;
+                transform: none;
+            }
+
+            .roadmap-content {
+                width: calc(100% - 50px);
+                margin-left: 50px;
+            }
+
+            .roadmap-step, .roadmap-step:nth-child(odd) {
+                flex-direction: row;
+            }
+
+            #jaas-container {
+                transform: scale(1.1);
+            }
+
+            nav {
+                padding: 15px 0;
+            }
+
+            .section-card {
+                padding: 25px;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .canva-embed {
+                display: none !important;
+            }
+
+            .canva-mobile {
+                display: block !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .job-title {
+                font-size: 0.8rem;
+                letter-spacing: 1px;
+            }
+
+            header {
+                padding: 50px 15px 40px;
+            }
+
+            .container {
+                padding: 0 15px;
+            }
+
+            .section-card {
+                padding: 20px;
+                margin-bottom: 20px;
+            }
+
+            #contact {
+                grid-template-columns: 1fr;
+                gap: 25px;
+                padding: 25px;
+            }
+        }
     </style>
-  
 </head>
 <body>
 
 <div class="container">
 
+    <!-- HEADER -->
     <header class="reveal" id="hero">
-
-<div style="max-width:700px; margin:auto; text-align:center;">
-
-    <h1>MARK_RECIO, MBA</h1>
-
-    <div class="job-title" id="typewriter"></div>
-
-    <!-- HERO STATEMENT -->
-    <p style="
-        margin-top:20px;
-        font-size:1.2rem;
-        color:#e6edf3;
-        line-height:1.6;
-    ">
-        Turn fragmented workforce data into a 
-        <span style="color:var(--accent-cyan); font-weight:bold;">
-        real-time intelligence system
-        </span>
-        that drives smarter, faster decisions.
-    </p>
-
-    <!-- CTA BUTTONS -->
-    <div style="margin-top:25px;">
-        <a href="#contact" class="btn btn-cta">BOOK STRATEGY SESSION</a>
-
-        <a href="https://markreciopro.github.io/marec_hr360/" 
-           target="_blank"
-           class="btn"
-           style="margin-left:10px; border:1px solid var(--border); color:#fff;">
-           VIEW PLATFORM DEMO
-        </a>
-    </div>
-
-</div>
-
-</header>
-  
-
-    <section class="section-card pitch-block reveal" id="value-proposition" style="position: relative; overflow: hidden; padding: 40px 30px;">
-    
-    <div style="
-        position: absolute;
-        top: -20px;
-        right: -20px;
-        width: 200px;
-        height: 200px;
-        z-index: 0;
-        pointer-events: none;
-        opacity: 0.4;
-    ">
-        <img 
-            src="https://i.ibb.co/B2c37pw7/Gemini-Generated-Image-dyoztzdyoztzdyoz.png"
-            alt="MAREC Logo"
-            style="
-                width: 100%;
-                height: auto;
-                filter: drop-shadow(0 0 15px rgba(88,166,255,0.3));
-            "
-        >
-    </div>
-
-    <div style="position: relative; z-index: 1; max-width: 85%;">
-        <span class="pitch-tag" style="letter-spacing: 2px; font-weight: bold; color: var(--accent-cyan);">[THE_PARTNERSHIP]</span>
-        
-        <h2 style="color: #fff; font-family: 'Fira Code', monospace; margin: 15px 0; font-size: 1.8rem; line-height: 1.2;">
-            Your <span style="color: var(--accent-cyan); text-shadow: 0 0 10px rgba(0,255,255,0.2);">Partner</span> in Intelligence.
-        </h2>
-
-       <p style="color: #e0e0e0; line-height: 1.8; font-size: 1.1rem; max-width: 800px;">
-    At <b>MAREC Insights</b>, we believe every organization—from scaling SMBs to mission-driven nonprofits—deserves absolute operational clarity. We bridge the critical gap between fragmented data and strategic growth through high-impact <b>Business Intelligence Remediation</b>.
-    <br><br>
-    Our flagship platform, <b>MAREC HR360</b>, serves as a masterclass in <b>Full-Stack Software Development</b> tailored for the modern workplace. It is more than just a dashboard; it is a dedicated workforce ecosystem engineered to transform manual, error-prone spreadsheets into high-performance, automated insights. By fusing <b>MBA-led strategy</b> with clean, scalable code, we deliver the custom <b>decision infrastructure</b> necessary to drive measurable human capital impact.
-</p>
-    </div>
-
-</section>
- 
-<section class="section-card reveal" id="mission-vision" style="border:1px solid var(--accent-cyan); background:rgba(88,166,255,0.05);">
-
-<span class="pitch-tag">[MISSION_VISION]</span>
-
-<h2 style="color:#fff; font-family:'Fira Code'; margin-top:10px;">
-Mission & Vision
-</h2>
-
-<div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:35px; margin-top:30px;">
-
-<div style="padding:25px; border:1px solid var(--border); border-radius:10px; background:rgba(0,0,0,0.25);">
-
-<div style="font-family:'Fira Code'; color:var(--accent-cyan); font-size:0.7rem; margin-bottom:8px;">
-[MISSION]
-</div>
-
-<h3 style="color:var(--accent-cyan); font-family:'Fira Code'; margin-top:0;">
-Empowering Data-Driven Organizations
-</h3>
-
-<p style="font-size:0.9rem; line-height:1.6; opacity:0.9;">
-Helping small and midsized organizations become more data-driven by transforming 
-complex data into clear, actionable insights through analytics, automation, and 
-modern technology—pioneered by the <b>MAREC HR360</b> ecosystem.
-</p>
-
-</div>
-
-<div style="padding:25px; border:1px solid var(--border); border-radius:10px; background:rgba(0,0,0,0.25);">
-
-<div style="font-family:'Fira Code'; color:var(--accent-green); font-size:0.7rem; margin-bottom:8px;">
-[VISION]
-</div>
-
-<h3 style="color:var(--accent-green); font-family:'Fira Code'; margin-top:0;">
-Catalyst for Innovation & Intelligence
-</h3>
-
-<p style="font-size:0.9rem; line-height:1.6; opacity:0.9;">
-To be a catalyst that empowers small and midsized organizations to innovate, grow, 
-and compete through modern software development, intelligent data architecture, 
-and the emerging power of AI.
-</p>
-
-</div>
-
-</div>
-
-</section> <!-- ✅ FIX: CLOSE mission-vision properly -->
-
-<!-- ================= PIPELINE ================= -->
-<section class="section-card reveal" style="border:1px solid var(--accent-purple); background:rgba(188,140,255,0.05); margin-top: 30px;">
-
-<span class="pitch-tag">[INTELLIGENCE_PIPELINE]</span>
-
-<h3 style="color:#fff; font-family:'Fira Code';">
-From Data to Software
-</h3>
-
-<p style="font-size:0.9rem;">
-MAREC Insights is built on a full-cycle intelligence model:
-</p>
-
-<p style="font-family:'Fira Code'; color:var(--accent-purple); margin-top:15px;">
-DATA → INSIGHT → PREDICTION → AUTOMATION → SCALABLE INTELLIGENCE SOFTWARE
-</p>
-
-<p style="font-size:0.85rem; opacity:0.8;">
-Unlike traditional consultants or developers, this pipeline ensures your data evolves 
-into a scalable system—culminating in the <b>HR360 Analytics Platform</b>.
-</p>
-
-</section>
-  
-  <h2 class="section-title" id="roadmap">Strategic Intelligence Engagement Roadmap</h2>
-<p style="font-size:0.75rem; opacity:0.6; text-align:center; margin-top:20px;">
-Typical clients enter at Stage 1–2 and scale into full intelligence systems like HR360.
-</p>
-<div class="roadmap-wrapper">
-
-<div class="roadmap-progress" id="roadmap-line"></div>
-
-<div class="roadmap-step reveal-step">
-<div class="roadmap-dot"></div>
-
-<div class="roadmap-content">
-
-<span class="pitch-tag">STAGE 01: DATA (DISCOVERY)</span>
-
-<h3 style="color:var(--accent-cyan);font-family:'Fira Code';font-size:1.1rem;">
-Strategic Data Audit
-</h3>
-
-<p style="font-size:0.85rem;">
-Initial evaluation of your data environment, reporting workflows, and operational goals.
-We identify data gaps, reporting inefficiencies, and opportunities for automation.
-</p>
-
-<div style="margin-top:15px;padding:12px;border:1px dashed rgba(88,166,255,0.3);border-radius:8px;background:rgba(0,0,0,0.2);">
-
-<h4 style="font-family:'Fira Code';font-size:0.75rem;margin:0 0 6px 0;color:#fff;">
-BUSINESS OUTCOME
-</h4>
-
-<p style="font-size:0.75rem;margin:0;opacity:0.8;">
-Clear roadmap for improving analytics, reporting efficiency, and decision visibility.
-</p>
-
-</div>
-
-<div class="price-box" style="color:var(--accent-green);">
-FREE / $250 STRATEGY SESSION
-</div>
-
-<span class="tech-stack">OUTPUT: Data Strategy Roadmap</span>
-
-</div>
-</div>
-
-
-<div class="roadmap-step reveal-step">
-<div class="roadmap-dot"></div>
-
-<div class="roadmap-content">
-
-<span class="pitch-tag">STAGE 02: INSIGHT (VISUAL INTELLIGENCE)</span>
-
-<h3 style="color:var(--accent-cyan);font-family:'Fira Code';font-size:1.1rem;">
-Operational Alpha Dashboard
-</h3>
-
-<p style="font-size:0.85rem;">
-Transform scattered spreadsheets into centralized dashboards with automated
-data pipelines and executive reporting.
-</p>
-
-<div style="margin-top:15px;padding:12px;border:1px dashed rgba(88,166,255,0.3);border-radius:8px;background:rgba(0,0,0,0.2);">
-
-<h4 style="font-family:'Fira Code';font-size:0.75rem;margin:0 0 6px 0;color:#fff;">
-BUSINESS OUTCOME
-</h4>
-
-<p style="font-size:0.75rem;margin:0;opacity:0.8;">
-50%+ reduction in manual reporting through automated BI dashboards and
-real-time performance tracking.
-</p>
-
-</div>
-
-<div class="price-box">
-$1.5K – $3K
-</div>
-
-<span class="tech-stack">STACK: Python | R | Power BI | ETL Automation</span>
-
-</div>
-</div>
-
-
-<div class="roadmap-step reveal-step">
-<div class="roadmap-dot"></div>
-
-<div class="roadmap-content" style="border-top:2px solid var(--accent-gold);">
-
-<span class="pitch-tag">STAGE 03: PREDICTION (PREDICTIVE INTELLIGENCE)</span>
-
-<h3 style="color:var(--accent-gold);font-family:'Fira Code';font-size:1.1rem;">
-Predictive Analytics Models
-</h3>
-
-<p style="font-size:0.85rem;">
-Machine learning models forecasting operational trends, workforce demand,
-revenue patterns, or nonprofit impact metrics.
-</p>
-
-<div style="margin-top:15px;padding:12px;border:1px dashed rgba(242,200,17,0.4);border-radius:8px;background:rgba(0,0,0,0.2);">
-
-<h4 style="font-family:'Fira Code';font-size:0.75rem;margin:0 0 6px 0;color:#fff;">
-BUSINESS OUTCOME
-</h4>
-
-<p style="font-size:0.75rem;margin:0;opacity:0.8;">
-Forecasting models that help leadership anticipate demand, reduce risk,
-and make proactive strategic decisions.
-</p>
-
-</div>
-
-<div class="price-box" style="color:var(--accent-gold);border-color:var(--accent-gold);">
-$3K – $6K
-</div>
-
-<span class="tech-stack">STACK: Python | ML Forecasting | Statistical Modeling</span>
-
-</div>
-</div>
-
-
-<div class="roadmap-step reveal-step">
-<div class="roadmap-dot"></div>
-
-<div class="roadmap-content" style="border-top:2px solid var(--accent-green);">
-
-<span class="pitch-tag">STAGE 04: AUTOMATION (INTELLIGENCE SYSTEMS)</span>
-
-<h3 style="color:var(--accent-green);font-family:'Fira Code';font-size:1.1rem;">
-Decision Intelligence Systems
-</h3>
-
-<p style="font-size:0.85rem;">
-Custom automation platforms that continuously analyze operational data
-and generate insights without manual reporting cycles.
-</p>
-
-<div style="margin-top:15px;padding:12px;border:1px dashed rgba(63,185,80,0.4);border-radius:8px;background:rgba(0,0,0,0.2);">
-
-<h4 style="font-family:'Fira Code';font-size:0.75rem;margin:0 0 6px 0;color:#fff;">
-BUSINESS OUTCOME
-</h4>
-
-<p style="font-size:0.75rem;margin:0;opacity:0.8;">
-Automated data systems that improve operational efficiency and enable
-real-time decision intelligence.
-</p>
-
-</div>
-
-<div class="price-box">
-$6K – $12K
-</div>
-
-<span class="tech-stack">STACK: Python | APIs | Automation Systems</span>
-
-</div>
-</div>
-
-  </div>
-<!-- ===================== STAGE 05: SOFTWARE PLATFORM ===================== -->
-<section class="section-card reveal marec-hero">
-
-    <!-- Background Layer -->
-    <div class="marec-bg"></div>
-
-    <!-- Content -->
-    <div class="marec-content container">
-
-        <span class="pitch-tag">STAGE 05: SOFTWARE PLATFORM</span>
-
-        <!-- LOGO (ENHANCED VISIBILITY) -->
-        <img 
-            src="https://raw.githubusercontent.com/markreciopro/marec_hr360/main/Marec%20HR360.png"
-            alt="MAREC HR360 Platform Logo"
-            class="marec-logo"
-        >
-
-        <!-- GLASS TEXT BOX -->
-        <div class="marec-glass">
-
-<h2>
-    Full-Stack HR Intelligence Platform
-</h2>
-
-<p>
-    <b>MAREC HR360</b> is a platform blueprint that can be 
-    <b>customized to align with your business model</b> and modern, innovative HR demands.
-    <br><br>
-    By combining workforce analytics, predictive insights, and automation, it delivers a 
-    scalable system that evolves with your organization.
-</p>
-
-            <a href="https://markreciopro.github.io/marec_hr360/" 
-               target="_blank" 
-               class="btn btn-cta">
-               LAUNCH_PLATFORM
-            </a>
-
-        </div>
-
-    </div>
-
-</section>
-
-<!-- 📊 COMPARISON -->
-<div style="margin-top:45px; text-align:left;">
-
-<h3 style="font-family:'Fira Code'; color:var(--accent-purple); font-size:0.9rem;">
-HOW YOUR ORGANIZATION EVOLVES
-</h3>
-
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>Capability</th>
-<th>MAREC HR360 (Platform)</th>
-<th>Marec Insights (Solutions)</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td><b>Approach</b></td>
-<td>Scalable HR intelligence platform aligned to your business model</td>
-<td>Custom-built solutions for targeted challenges</td>
-</tr>
-
-<tr>
-<td><b>What You Get</b></td>
-<td>Integrated analytics, automation, and predictive workforce intelligence</td>
-<td>Focused solutions delivering immediate clarity</td>
-</tr>
-
-<tr>
-<td><b>Time to Impact</b></td>
-<td>Continuous real-time insights and system evolution</td>
-<td>Rapid implementation with quick wins</td>
-</tr>
-
-<tr>
-<td><b>Scalability</b></td>
-<td style="color:var(--accent-green); font-weight:bold;">
-Adapts and scales with your organization’s growth and HR innovation needs
-</td>
-<td style="color:var(--accent-cyan); font-weight:bold;">
-Solves immediate needs with flexible, targeted execution
-</td>
-</tr>
-
-<tr>
-<td><b>Best For</b></td>
-<td>Organizations building long-term, intelligent HR ecosystems</td>
-<td>Teams seeking immediate insights and operational improvements</td>
-</tr>
-</tbody>
-</table>
-</div>
-
-<p style="font-size:0.75rem; color:var(--accent-green); margin-top:12px; font-family:'Fira Code'; text-align:center;">
-→ Start with solutions. Evolve into a fully articulated HR intelligence platform.
-</p>
-
-</div>
-
-<!-- 🧠 BUSINESS OUTCOME -->
-<div style="margin-top:40px; padding:20px; border:1px dashed rgba(188,140,255,0.4); border-radius:12px; background:rgba(0,0,0,0.25); text-align:left;">
-
-<h4 style="font-family:'Fira Code'; font-size:0.75rem; color:#fff;">
-BUSINESS OUTCOME
-</h4>
-
-<p style="font-size:0.9rem; line-height:1.7;">
-A <b>customizable HR intelligence platform</b> designed to align with your business model and 
-support modern, innovative workforce strategies.
-
-<br><br>
-
-• Unified workforce analytics  
-• Predictive HR and operational modeling  
-• Intelligent automation systems  
-• Scalable, cloud-ready architecture  
-
-<br><br>
-
-Result: <b>Operate with continuous, data-driven intelligence tailored to your organization.</b>
-</p>
-
-</div>
-<!-- ================= PROVEN IMPACT ================= -->
-<h2 class="section-title">Proven Impact</h2>
-
-<div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:20px; margin-top:20px;">
-
-<div class="price-box">
-<b style="color:var(--accent-green); font-size:1.5rem;">50%+</b><br>
-Manual reporting reduction<br>
-<span style="font-size:0.7rem; opacity:0.7;">via automated dashboards</span>
-</div>
-
-<div class="price-box">
-<b style="color:var(--accent-cyan); font-size:1.5rem;">3x</b><br>
-Faster decision-making<br>
-<span style="font-size:0.7rem; opacity:0.7;">real-time intelligence</span>
-</div>
-
-<div class="price-box">
-<b style="color:var(--accent-purple); font-size:1.5rem;">100%</b><br>
-Centralized data visibility<br>
-<span style="font-size:0.7rem; opacity:0.7;">single source of truth</span>
-</div>
-
-</div>
-<!-- 💰 PRICING TIERS -->
-<div style="margin-top:40px; display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:20px;">
-
-<div class="price-box">
-<b style="color:var(--accent-cyan);">STARTER PLATFORM</b><br><br>
-
-<span style="font-size:0.75rem; opacity:0.8;">
-Foundation system tailored to your business model
-</span><br><br>
-
-$12K – $20K Build<br>
-<span style="font-size:0.7rem;">$99 – $199/mo</span><br><br>
-
-<span style="font-size:0.75rem; opacity:0.8;">
-• Core workforce dashboards<br>
-• Automated reporting workflows<br>
-• Centralized data visibility<br>
-• Entry-level HR intelligence system
-</span>
-</div>
-
-
-<div class="price-box" style="border-color:var(--accent-purple);">
-<b style="color:var(--accent-purple);">GROWTH PLATFORM</b><br><br>
-
-<span style="font-size:0.75rem; opacity:0.8;">
-Scalable system aligned to evolving HR innovation needs
-</span><br><br>
-
-$20K – $50K Build<br>
-<span style="font-size:0.7rem;">$199 – $399/mo</span><br><br>
-
-<span style="font-size:0.75rem; opacity:0.8;">
-• Predictive workforce analytics<br>
-• Advanced dashboards + integrations<br>
-• Process automation systems<br>
-• Cross-functional data insights
-</span>
-</div>
-
-
-<div class="price-box">
-<b style="color:var(--accent-green);">ENTERPRISE SYSTEM</b><br><br>
-
-<span style="font-size:0.75rem; opacity:0.8;">
-Fully articulated HR intelligence platform built for scale
-</span><br><br>
-
-$50K – $100K+ Build<br>
-<span style="font-size:0.7rem;">$399 – $999/mo</span><br><br>
-
-<span style="font-size:0.75rem; opacity:0.8;">
-• Full automation + AI-driven insights<br>
-• Custom infrastructure & integrations<br>
-• Real-time decision intelligence systems<br>
-• Enterprise-grade scalability
-</span>
-</div>
-
-</div>
-
-
-<!-- ⚙️ STACK -->
-<span class="tech-stack" style="margin-top:15px;">
-STACK: React | FastAPI | Python | Power BI | APIs | Cloud Infrastructure | PostgreSQL | Automation Systems | Predictive Modeling | HR360 SaaS Architecture
-</span>
-
-</div>
-</section>
-    <section class="section-card reveal" style="border: 1px dashed var(--accent-cyan); background: rgba(88, 166, 255, 0.05);" id="philosophy">
-        <span class="pitch-tag">[PARTNERSHIP_VALUES]</span>
-        <h3 style="color: #fff; font-family: 'Fira Code'; font-size: 1.2rem; margin-top: 10px;">Tailored <span style="color: var(--accent-cyan);">Strategic Value</span></h3>
-        <p style="font-size: 0.95rem;">Every organization is unique. Whether you are navigating tight nonprofit budgets or fast-paced business scaling, I remain flexible and dedicated to ensuring your data serves your specific mission through customized <b>MAREC Insights</b>.</p>
-    </section>
-<p style="font-size:0.7rem; color:var(--accent-green); text-align:center;">
-Limited client capacity to ensure high-quality delivery
-</p>
-    <h2 class="section-title">The Collaborative Advantage</h2>
-
-<div class="table-container reveal">
-<table>
-<thead>
-<tr>
-<th>Capability</th>
-<th>Platform Freelancer</th>
-<th>Big Agency</th>
-<th class="highlight-col">MAREC Insights (HR360)</th>
-</tr>
-</thead>
-
-<tbody>
-
-<tr>
-<td><b>Approach</b></td>
-<td>Task Execution</td>
-<td>Project Delivery</td>
-<td class="highlight-col">End-to-End Intelligence System</td>
-</tr>
-
-<tr>
-<td><b>Strategic Depth</b></td>
-<td>Limited</td>
-<td>Siloed Teams</td>
-<td class="highlight-col">MBA-Led + Data + Engineering</td>
-</tr>
-
-<tr>
-<td><b>Technology</b></td>
-<td>Basic Tools</td>
-<td>Proprietary Black Box</td>
-<td class="highlight-col">Transparent Python | BI | ML | APIs</td>
-</tr>
-
-<tr>
-<td><b>Flexibility</b></td>
-<td>Rigid Scope</td>
-<td>Slow Change Cycles</td>
-<td class="highlight-col">Adaptive + Scalable Architecture</td>
-</tr>
-
-<tr>
-<td><b>Pricing Model</b></td>
-<td>Hourly / Unpredictable</td>
-<td>High Retainers</td>
-<td class="highlight-col">Fixed Stages + Scalable Investment</td>
-</tr>
-
-<tr>
-<td><b>End Result</b></td>
-<td>A Report</td>
-<td>A Delivered Project</td>
-<td class="highlight-col">A Scalable Intelligence Platform</td>
-</tr>
-
-</tbody>
-</table>
-</div>
-
-    <h2 class="section-title">Insights Brief</h2>
-
-<div class="reveal" style="margin-bottom: 60px;">
-
-    <div style="position: relative; width: 100%;">
-
-        <!-- DESKTOP EMBED -->
-        <div class="canva-embed" style="
-            position: relative;
-            width: 100%;
-            padding-top: 56.25%;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.5);
-            border-radius: 8px;
-            overflow: hidden;
-        ">
-            <iframe 
-                src="https://www.canva.com/design/DAHCeFLjI5I/view?embed"
-                style="
-                    position:absolute;
-                    width:100%;
-                    height:100%;
-                    top:0;
-                    left:0;
-                    border:none;
-                "
-                allowfullscreen>
-            </iframe>
-        </div>
-
-        <!-- MOBILE FALLBACK -->
-        <div class="canva-mobile" style="
-            display: none;
-            text-align: center;
-            padding: 40px 20px;
-        ">
-            <p style="font-family:'Fira Code'; color:#fff; margin-bottom:15px;">
-                VIEW INTERACTIVE INSIGHTS
+        <div style="max-width:700px; margin:auto; text-align:center;">
+            <h1>MARK_RECIO, MBA</h1>
+            <div class="job-title" id="typewriter"></div>
+
+            <p style="
+                margin-top:20px;
+                font-size:1.2rem;
+                color:#e6edf3;
+                line-height:1.6;
+                animation: fadeInUp 0.8s ease-out 0.4s both;
+            ">
+                Turn fragmented workforce data into a 
+                <span style="color:var(--accent-cyan); font-weight:bold;">
+                real-time intelligence system
+                </span>
+                that drives smarter, faster decisions.
             </p>
 
-            <a href="https://www.canva.com/design/DAHCeFLjI5I/m0-1P1sza8PIG5_szSMYkQ/view"
-               target="_blank"
-               class="btn btn-cta">
-               OPEN_CANVA_MOBILE
-            </a>
+            <div style="margin-top:25px; animation: fadeInUp 0.8s ease-out 0.6s both;">
+                <a href="#contact" class="btn btn-cta">BOOK STRATEGY SESSION</a>
+                <a href="https://markreciopro.github.io/marec_hr360/" 
+                   target="_blank"
+                   class="btn"
+                   style="margin-left:10px; border:1px solid var(--border); color:#fff; background: rgba(255,255,255,0.05);">
+                   VIEW PLATFORM DEMO
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- VALUE PROPOSITION -->
+    <section class="section-card pitch-block reveal" id="value-proposition" style="position: relative; overflow: hidden; padding: 40px 30px;">
+        <div style="
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            width: 200px;
+            height: 200px;
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0.4;
+        ">
+            <img 
+                src="https://i.ibb.co/B2c37pw7/Gemini-Generated-Image-dyoztzdyoztzdyoz.png"
+                alt="MAREC Logo"
+                style="
+                    width: 100%;
+                    height: auto;
+                    filter: drop-shadow(0 0 15px rgba(88,166,255,0.3));
+                "
+            >
         </div>
 
+        <div style="position: relative; z-index: 1; max-width: 85%;">
+            <span class="pitch-tag" style="letter-spacing: 2px; font-weight: bold; color: var(--accent-cyan);">[THE_PARTNERSHIP]</span>
+            
+            <h2 style="color: #fff; font-family: 'Fira Code', monospace; margin: 15px 0; font-size: 1.8rem; line-height: 1.2;">
+                Your <span style="color: var(--accent-cyan); text-shadow: 0 0 10px rgba(0,255,255,0.2);">Partner</span> in Intelligence.
+            </h2>
+
+            <p style="color: #e0e0e0; line-height: 1.8; font-size: 1.1rem; max-width: 800px;">
+                At <b>MAREC Insights</b>, we believe every organization—from scaling SMBs to mission-driven nonprofits—deserves absolute operational clarity. We bridge the critical gap between fragmented data and strategic growth through high-impact <b>Business Intelligence Remediation</b>.
+                <br><br>
+                Our flagship platform, <b>MAREC HR360</b>, serves as a masterclass in <b>Full-Stack Software Development</b> tailored for the modern workplace. It is more than just a dashboard; it is a dedicated workforce ecosystem engineered to transform manual, error-prone spreadsheets into high-performance, automated insights.
+            </p>
+        </div>
+    </section>
+
+    <!-- MISSION & VISION -->
+    <section class="section-card reveal" id="mission-vision" style="border:1px solid var(--accent-cyan); background:rgba(88,166,255,0.05);">
+        <span class="pitch-tag">[MISSION_VISION]</span>
+
+        <h2 style="color:#fff; font-family:'Fira Code'; margin-top:10px;">
+            Mission & Vision
+        </h2>
+
+        <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:35px; margin-top:30px;">
+            <div style="padding:25px; border:1px solid var(--border); border-radius:10px; background:rgba(0,0,0,0.25); transition: var(--transition); cursor: pointer;" onmouseover="this.style.borderColor='var(--accent-cyan)'; this.style.boxShadow='0 0 15px rgba(88,166,255,0.3)'" onmouseout="this.style.borderColor='var(--border)'; this.style.boxShadow='none'">
+                <div style="font-family:'Fira Code'; color:var(--accent-cyan); font-size:0.7rem; margin-bottom:8px;">
+                    [MISSION]
+                </div>
+                <h3 style="color:var(--accent-cyan); font-family:'Fira Code'; margin-top:0;">
+                    Empowering Data-Driven Organizations
+                </h3>
+                <p style="font-size:0.9rem; line-height:1.6; opacity:0.9;">
+                    Helping small and midsized organizations become more data-driven by transforming complex data into clear, actionable insights.
+                </p>
+            </div>
+
+            <div style="padding:25px; border:1px solid var(--border); border-radius:10px; background:rgba(0,0,0,0.25); transition: var(--transition); cursor: pointer;" onmouseover="this.style.borderColor='var(--accent-green)'; this.style.boxShadow='0 0 15px rgba(63,185,80,0.3)'" onmouseout="this.style.borderColor='var(--border)'; this.style.boxShadow='none'">
+                <div style="font-family:'Fira Code'; color:var(--accent-green); font-size:0.7rem; margin-bottom:8px;">
+                    [VISION]
+                </div>
+                <h3 style="color:var(--accent-green); font-family:'Fira Code'; margin-top:0;">
+                    Catalyst for Innovation & Intelligence
+                </h3>
+                <p style="font-size:0.9rem; line-height:1.6; opacity:0.9;">
+                    To be a catalyst that empowers organizations to innovate, grow, and compete through modern software development and intelligent data architecture.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- INTELLIGENCE PIPELINE -->
+    <section class="section-card reveal" style="border:1px solid var(--accent-purple); background:rgba(188,140,255,0.05); margin-top: 30px;">
+        <span class="pitch-tag">[INTELLIGENCE_PIPELINE]</span>
+
+        <h3 style="color:#fff; font-family:'Fira Code';">
+            From Data to Software
+        </h3>
+
+        <p style="font-size:0.9rem;">
+            MAREC Insights is built on a full-cycle intelligence model:
+        </p>
+
+        <p style="font-family:'Fira Code'; color:var(--accent-purple); margin-top:15px; font-weight: bold;">
+            DATA → INSIGHT → PREDICTION → AUTOMATION → SCALABLE INTELLIGENCE SOFTWARE
+        </p>
+
+        <p style="font-size:0.85rem; opacity:0.8;">
+            Unlike traditional consultants or developers, this pipeline ensures your data evolves into a scalable system—culminating in the <b>HR360 Analytics Platform</b>.
+        </p>
+    </section>
+
+    <!-- ROADMAP SECTION -->
+    <h2 class="section-title" id="roadmap">Strategic Intelligence Engagement Roadmap</h2>
+    <p style="font-size:0.75rem; opacity:0.6; text-align:center; margin-top:20px;">
+        Typical clients enter at Stage 1–2 and scale into full intelligence systems like HR360.
+    </p>
+
+    <div class="roadmap-wrapper">
+        <div class="roadmap-progress" id="roadmap-line"></div>
+
+        <!-- STAGE 1 -->
+        <div class="roadmap-step reveal-step">
+            <div class="roadmap-dot"></div>
+            <div class="roadmap-content">
+                <span class="pitch-tag">STAGE 01: DATA (DISCOVERY)</span>
+                <h3 style="color:var(--accent-cyan);font-family:'Fira Code';font-size:1.1rem;">
+                    Strategic Data Audit
+                </h3>
+                <p style="font-size:0.85rem;">
+                    Initial evaluation of your data environment, reporting workflows, and operational goals. We identify data gaps and automation opportunities.
+                </p>
+                <div style="margin-top:15px;padding:12px;border:1px dashed rgba(88,166,255,0.3);border-radius:8px;background:rgba(0,0,0,0.2);">
+                    <h4 style="font-family:'Fira Code';font-size:0.75rem;margin:0 0 6px 0;color:#fff;">
+                        OUTCOME
+                    </h4>
+                    <p style="font-size:0.75rem;margin:0;opacity:0.8;">
+                        Clear roadmap for analytics and decision visibility.
+                    </p>
+                </div>
+                <div class="price-box" style="color:var(--accent-green);">
+                    FREE / $250 STRATEGY SESSION
+                </div>
+                <span class="tech-stack">OUTPUT: Data Strategy Roadmap</span>
+            </div>
+        </div>
+
+        <!-- STAGE 2 -->
+        <div class="roadmap-step reveal-step">
+            <div class="roadmap-dot"></div>
+            <div class="roadmap-content">
+                <span class="pitch-tag">STAGE 02: INSIGHT (VISUAL INTELLIGENCE)</span>
+                <h3 style="color:var(--accent-cyan);font-family:'Fira Code';font-size:1.1rem;">
+                    Operational Alpha Dashboard
+                </h3>
+                <p style="font-size:0.85rem;">
+                    Transform scattered spreadsheets into centralized dashboards with automated data pipelines and executive reporting.
+                </p>
+                <div style="margin-top:15px;padding:12px;border:1px dashed rgba(88,166,255,0.3);border-radius:8px;background:rgba(0,0,0,0.2);">
+                    <h4 style="font-family:'Fira Code';font-size:0.75rem;margin:0 0 6px 0;color:#fff;">
+                        OUTCOME
+                    </h4>
+                    <p style="font-size:0.75rem;margin:0;opacity:0.8;">
+                        50%+ reduction in manual reporting through automated BI.
+                    </p>
+                </div>
+                <div class="price-box">
+                    $1.5K – $3K
+                </div>
+                <span class="tech-stack">STACK: Python | Power BI | ETL</span>
+            </div>
+        </div>
+
+        <!-- STAGE 3 -->
+        <div class="roadmap-step reveal-step">
+            <div class="roadmap-dot"></div>
+            <div class="roadmap-content" style="border-top:2px solid var(--accent-gold);">
+                <span class="pitch-tag">STAGE 03: PREDICTION (PREDICTIVE INTELLIGENCE)</span>
+                <h3 style="color:var(--accent-gold);font-family:'Fira Code';font-size:1.1rem;">
+                    Predictive Analytics Models
+                </h3>
+                <p style="font-size:0.85rem;">
+                    Machine learning models forecasting operational trends, workforce demand, and revenue patterns.
+                </p>
+                <div style="margin-top:15px;padding:12px;border:1px dashed rgba(242,200,17,0.4);border-radius:8px;background:rgba(0,0,0,0.2);">
+                    <h4 style="font-family:'Fira Code';font-size:0.75rem;margin:0 0 6px 0;color:#fff;">
+                        OUTCOME
+                    </h4>
+                    <p style="font-size:0.75rem;margin:0;opacity:0.8;">
+                        Forecasting models for proactive decision-making.
+                    </p>
+                </div>
+                <div class="price-box" style="color:var(--accent-gold);border-color:var(--accent-gold);">
+                    $3K – $6K
+                </div>
+                <span class="tech-stack">STACK: Python | ML | Statistical Modeling</span>
+            </div>
+        </div>
+
+        <!-- STAGE 4 -->
+        <div class="roadmap-step reveal-step">
+            <div class="roadmap-dot"></div>
+            <div class="roadmap-content" style="border-top:2px solid var(--accent-green);">
+                <span class="pitch-tag">STAGE 04: AUTOMATION (INTELLIGENCE SYSTEMS)</span>
+                <h3 style="color:var(--accent-green);font-family:'Fira Code';font-size:1.1rem;">
+                    Decision Intelligence Systems
+                </h3>
+                <p style="font-size:0.85rem;">
+                    Custom automation platforms that continuously analyze operational data and generate insights.
+                </p>
+                <div style="margin-top:15px;padding:12px;border:1px dashed rgba(63,185,80,0.4);border-radius:8px;background:rgba(0,0,0,0.2);">
+                    <h4 style="font-family:'Fira Code';font-size:0.75rem;margin:0 0 6px 0;color:#fff;">
+                        OUTCOME
+                    </h4>
+                    <p style="font-size:0.75rem;margin:0;opacity:0.8;">
+                        Automated systems for real-time decision intelligence.
+                    </p>
+                </div>
+                <div class="price-box">
+                    $6K – $12K
+                </div>
+                <span class="tech-stack">STACK: Python | APIs | Automation</span>
+            </div>
+        </div>
     </div>
 
-</div>
+    <!-- STAGE 5: HR360 PLATFORM -->
+    <section class="section-card reveal marec-hero">
+        <div class="marec-bg"></div>
+        <div class="marec-content container">
+            <span class="pitch-tag">STAGE 05: SOFTWARE PLATFORM</span>
+            <img 
+                src="https://raw.githubusercontent.com/markreciopro/marec_hr360/main/Marec%20HR360.png"
+                alt="MAREC HR360 Platform Logo"
+                class="marec-logo"
+            >
+            <div class="marec-glass">
+                <h2>Full-Stack HR Intelligence Platform</h2>
+                <p>
+                    <b>MAREC HR360</b> is a platform blueprint customized to align with your business model and modern HR innovation demands.
+                    <br><br>
+                    By combining workforce analytics, predictive insights, and automation, it delivers a scalable system that evolves with your organization.
+                </p>
+                <a href="https://markreciopro.github.io/marec_hr360/" 
+                   target="_blank" 
+                   class="btn btn-cta">
+                   LAUNCH_PLATFORM
+                </a>
+            </div>
+        </div>
+    </section>
 
-    <h2 class="section-title" id="command-center">Live Discovery Zone</h2>
+    <!-- COMPARISON TABLE -->
+    <div style="margin-top:45px; text-align:left;">
+        <h3 style="font-family:'Fira Code'; color:var(--accent-purple); font-size:0.9rem;">
+            HOW YOUR ORGANIZATION EVOLVES
+        </h3>
+
+        <div class="table-container reveal">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Capability</th>
+                        <th>MAREC HR360 (Platform)</th>
+                        <th>Marec Insights (Solutions)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><b>Approach</b></td>
+                        <td>Scalable HR intelligence platform</td>
+                        <td>Custom-built solutions</td>
+                    </tr>
+                    <tr>
+                        <td><b>Time to Impact</b></td>
+                        <td>Continuous real-time insights</td>
+                        <td>Rapid implementation</td>
+                    </tr>
+                    <tr>
+                        <td><b>Best For</b></td>
+                        <td style="color:var(--accent-green); font-weight:bold;">
+                            Long-term intelligent HR ecosystems
+                        </td>
+                        <td style="color:var(--accent-cyan); font-weight:bold;">
+                            Immediate operational improvements
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- ENGAGEMENT ZONE -->
+    <h2 class="section-title">Live Discovery Zone</h2>
     <div class="engagement-zone reveal">
         <div class="video-wrapper">
             <iframe src="https://www.youtube.com/embed/qHwgrgWFl98?autoplay=1&mute=1&loop=1&playlist=qHwgrgWFl98&controls=0&modestbranding=1" style="position:absolute; top:0; left:0; width:100%; height:100%; border:none;" allow="autoplay; encrypted-media" title="Data Visualization Showcase"></iframe>
@@ -929,14 +1256,13 @@ Limited client capacity to ensure high-quality delivery
             
             <div class="jitsi-viewport">
                 <div class="jitsi-mask">
-                    <img src="https://i.ibb.co/HDrzWVKc/jitsi-logo.png" class="jitsi-overlay-logo" alt="Jitsi Meeting Logo">
+                    <img src="https://jitsi.org/wp-content/uploads/2017/07/jitsi-logo-81.png" class="jitsi-overlay-logo" alt="Jitsi Meeting Logo" style="height: 50px;">
                 </div>
                 
                 <div id="jaas-container">
                     <div id="mobile-cta" style="display:none; width: 100%; text-align: center; padding: 40px; background: var(--bg-dark); height: 100%; position: absolute; z-index: 50;">
-                        <img src="https://jitsi.org/wp-content/uploads/2017/07/jitsi-logo-81.png" alt="Jitsi" style="width:60px; margin-bottom:15px;">
-                        <h4 style="font-family:'Fira Code'; color:#fff;">MAREC_CONSULTING_NODE</h4>
-                        <button onclick="launchMobileMeeting()" class="btn btn-cta" style="width:100%;">JOIN_VIA_BROWSER</button>
+                        <h4 style="font-family:'Fira Code'; color:#fff; margin-bottom: 20px;">MARC_CONSULTING_NODE</h4>
+                        <button onclick="launchMobileMeeting()" class="btn btn-cta">JOIN_VIA_BROWSER</button>
                     </div>
                     <div id="desktop-loading" style="display: flex; justify-content: center; align-items: center; height: 100%; color: var(--accent-cyan); font-family: 'Fira Code'; font-size: 0.7rem;">CONNECTING_SECURE_GATEWAY...</div>
                 </div>
@@ -944,6 +1270,7 @@ Limited client capacity to ensure high-quality delivery
         </div>
     </div>
 
+    <!-- CONTACT SECTION -->
     <div id="contact" class="reveal">
         <div>
             <h3 style="color:var(--accent-cyan); font-family: 'Fira Code'; margin-top: 0;">[LET'S_CONNECT]</h3>
@@ -951,19 +1278,21 @@ Limited client capacity to ensure high-quality delivery
                 Ready to find the <span style="color: var(--accent-cyan);">story</span> in your data?
             </p>
             <p style="font-size: 0.95rem; opacity: 0.9; margin-bottom: 25px;">
-                Whether you are scaling for <b>profit</b> or driving a <b>nonprofit mission</b>, I’m here to help you find clarity using <b>MAREC Insights</b> and <b>HR360 Analytics</b>.
+                Whether scaling for <b>profit</b> or driving a <b>nonprofit mission</b>, I'm here to help you achieve clarity using <b>MAREC Insights</b> and <b>HR360 Analytics</b>.
             </p>
 
             <div style="margin: 20px 0;">
-                <a href="https://markreciopro.github.io/Portfolio/" target="_blank" class="contact-link-btn" aria-label="View Data Portfolio">> VIEW_DATA_WORK</a>
-                <a href="https://www.linkedin.com/in/marecio/" target="_blank" class="contact-link-btn" aria-label="Connect on LinkedIn">> LINKEDIN</a>
+                <a href="https://markreciopro.github.io/Portfolio/" target="_blank" class="contact-link-btn">> VIEW_DATA_WORK</a>
+                <a href="https://www.linkedin.com/in/marecio/" target="_blank" class="contact-link-btn">> LINKEDIN</a>
             </div>
+            
             <address style="font-style: normal; font-size:0.8rem; opacity:0.8; font-family: 'Fira Code';">
                 <b>Email:</b> mar@marec.site<br>
                 <b>Phone:</b> (702) 201-4905<br>
                 <b>HQ:</b> Las Vegas, NV
             </address>
         </div>
+
         <form action="https://formspree.io/f/mreaeden" method="POST">
             <div style="margin-bottom: 15px; font-family: 'Fira Code'; font-size: 0.75rem; color: var(--accent-green); font-weight: bold;">// INQUIRY_NODE:</div>
             <input type="text" name="name" placeholder="Your Name or Organization" required>
@@ -972,15 +1301,22 @@ Limited client capacity to ensure high-quality delivery
             <button type="submit" class="btn btn-cta" style="width: 100%;">START_THE_ROADMAP</button>
         </form>
     </div>
+
 </div>
 
-<footer style="text-align: center; padding: 60px 20px; color: #8b949e; font-family: 'Fira Code'; font-size: 0.7rem; border-top: 1px solid var(--border);">
+<!-- FOOTER -->
+<footer>
     © 2026 MAREC INSIGHTS | <span style="color: var(--accent-green);">MISSION_FOCUSED</span> | Data Strategy & HR360 Analytics for SMBs & Nonprofits
 </footer>
 
+<!-- JAVASCRIPT -->
 <script>
+    /* ============================================ */
+    /* TYPEWRITER EFFECT */
+    /* ============================================ */
     const typeText = "Strategic Data Architect | Intelligence Partner";
     let typeIndex = 0;
+
     function typeWriter() {
         const target = document.getElementById("typewriter");
         if (target && typeIndex < typeText.length) {
@@ -990,70 +1326,87 @@ Limited client capacity to ensure high-quality delivery
         }
     }
 
+    /* ============================================ */
+    /* SCROLL REVEAL ANIMATION */
+    /* ============================================ */
     function reveal() {
         document.querySelectorAll(".reveal").forEach(el => {
-            if (el.getBoundingClientRect().top < window.innerHeight - 50) el.classList.add("active");
+            if (el.getBoundingClientRect().top < window.innerHeight - 50) {
+                el.classList.add("active");
+            }
         });
 
         const roadmapSteps = document.querySelectorAll(".reveal-step");
         const roadmapLine = document.getElementById("roadmap-line");
         let activeSteps = 0;
+
         roadmapSteps.forEach((step, index) => {
             if (step.getBoundingClientRect().top < window.innerHeight * 0.7) {
                 step.classList.add("active");
                 activeSteps = index + 1;
             }
         });
-        if(roadmapLine) roadmapLine.style.height = (activeSteps / roadmapSteps.length) * 100 + "%";
+
+        if (roadmapLine) {
+            roadmapLine.style.height = (activeSteps / roadmapSteps.length) * 100 + "%";
+        }
     }
 
+    /* ============================================ */
+    /* MOBILE MEETING */
+    /* ============================================ */
     function launchMobileMeeting() {
         const roomUrl = "https://8x8.vc/vpaas-magic-cookie-0df9147ea04144c194c704c4538286ea/StrategicConsultationRoom#config.disableDeepLinking=true&interfaceConfig.MOBILE_APP_PROMO=false";
         window.open(roomUrl, '_blank');
     }
 
+    /* ============================================ */
+    /* JITSI INITIALIZATION */
+    /* ============================================ */
     function initJitsi() {
         const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
         const mobileCta = document.getElementById('mobile-cta');
         const desktopLoading = document.getElementById('desktop-loading');
 
         if (isMobile) {
-            if(mobileCta) mobileCta.style.display = 'block';
-            if(desktopLoading) desktopLoading.style.display = 'none';
+            if (mobileCta) mobileCta.style.display = 'block';
+            if (desktopLoading) desktopLoading.style.display = 'none';
         } else if (window.JitsiMeetExternalAPI) {
-            if(desktopLoading) desktopLoading.style.display = 'none';
+            if (desktopLoading) desktopLoading.style.display = 'none';
+
             const options = {
                 roomName: "vpaas-magic-cookie-0df9147ea04144c194c704c4538286ea/StrategicConsultationRoom",
                 parentNode: document.querySelector('#jaas-container'),
-                width: '100%', 
+                width: '100%',
                 height: '100%',
                 configOverwrite: {
                     startWithAudioMuted: true,
                     startWithVideoMuted: true,
                     prejoinPageEnabled: false,
-                    disableDeepLinking: true,
-                    customStyles: {
-                        'avatar': { 'display': 'none !important' }
-                    }
+                    disableDeepLinking: true
                 },
                 interfaceConfigOverwrite: {
                     TILE_VIEW_MAX_COLUMNS: 1,
                     MOBILE_APP_PROMO: false,
                     SHOW_JITSI_WATERMARK: false,
-                    SHOW_BRAND_WATERMARK: false,
-                    SHOW_PROMOTIONAL_CLOSE_PAGE: false,
-                    DEFAULT_LOCAL_DISPLAY_NAME: 'MAREC'
+                    SHOW_BRAND_WATERMARK: false
                 }
             };
+
             new JitsiMeetExternalAPI("8x8.vc", options);
-        } else { setTimeout(initJitsi, 500); }
+        } else {
+            setTimeout(initJitsi, 500);
+        }
     }
 
+    /* ============================================ */
+    /* INITIALIZATION */
+    /* ============================================ */
     window.addEventListener('DOMContentLoaded', () => {
         typeWriter();
         window.addEventListener("scroll", reveal);
         reveal();
-        initJitsi();
+        setTimeout(initJitsi, 1000);
     });
 </script>
 
