@@ -1,0 +1,360 @@
+/* ============================================================
+   MAREC INSIGHTS — GLOBAL THEME
+   Dark Glass • Neon Accents • Modern Analytics Branding
+   ============================================================ */
+
+/* Root Variables */
+:root {
+  --bg-dark: #0d1117;
+  --bg-card: rgba(22, 27, 34, 0.55);
+  --accent-cyan: #58a6ff;
+  --accent-green: #3fb950;
+  --accent-purple: #bc8cff;
+  --highlight-color: #f2c811;
+  --text-main: #c9d1d9;
+  --border: rgba(255, 255, 255, 0.1);
+  --border-bright: rgba(88, 166, 255, 0.3);
+  --transition: all 0.4s ease;
+}
+
+/* Reset */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  color: var(--text-main);
+  background: var(--bg-dark);
+  background-image:
+    linear-gradient(135deg, rgba(13,17,23,0.95), rgba(13,17,23,0.92)),
+    url('https://i.ibb.co/ZzCVqzH9/Gemini-Generated-Image-bn1v5kbn1v5kbn1v.png');
+  background-size: cover;
+  background-attachment: fixed;
+  min-height: 100vh;
+  padding: 40px;
+  display: flex;
+  justify-content: center;
+}
+
+/* Container */
+.container {
+  width: 100%;
+  max-width: 1200px;
+}
+
+/* Header */
+.header {
+  text-align: center;
+  padding: 40px 20px;
+  background: rgba(13, 17, 23, 0.45);
+  backdrop-filter: blur(12px);
+  border-radius: 12px;
+  animation: fadeDown 0.7s ease-out;
+}
+
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.main-title {
+  font-family: 'Fira Code', monospace;
+  font-size: clamp(3rem, 8vw, 5rem);
+  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 25px rgba(88,166,255,0.4);
+  margin-bottom: 15px;
+}
+
+#typewriter {
+  font-family: 'Fira Code', monospace;
+  font-size: 1.4rem;
+  color: #fff;
+  min-height: 1.4em;
+  letter-spacing: 1px;
+}
+
+/* Tagline */
+.tagline {
+  margin-top: 15px;
+  font-size: 1.15rem;
+  opacity: 0.9;
+}
+
+.highlight {
+  color: var(--highlight-color);
+  font-weight: 700;
+}
+
+/* Section Cards */
+.section-card {
+  background: var(--bg-card);
+  padding: 50px 30px;
+  margin: 40px 0;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  backdrop-filter: blur(10px);
+  transition: var(--transition);
+}
+
+.section-card:hover {
+  background: rgba(22,27,34,0.65);
+  transform: translateY(-6px);
+  border-color: var(--border-bright);
+}
+
+/* Section Titles */
+.section-title {
+  font-family: 'Fira Code', monospace;
+  font-size: 1.5rem;
+  color: var(--accent-cyan);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 15px;
+}
+
+.section-tag {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.9rem;
+  color: var(--accent-purple);
+  opacity: 0.8;
+}
+
+/* Transparent Logo */
+.background-graphic {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.marec-logo {
+  width: 260px;
+  opacity: 0.55;
+  filter: drop-shadow(0 0 25px rgba(88,166,255,0.25));
+  transition: 0.4s ease;
+}
+
+.marec-logo:hover {
+  opacity: 0.75;
+  transform: scale(1.03);
+}
+
+/* Mission & Vision */
+.mission-vision-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+}
+
+.mission-box, .vision-box {
+  background: rgba(255,255,255,0.06);
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+}
+
+.tag {
+  font-family: 'Fira Code', monospace;
+  color: var(--accent-cyan);
+  margin-bottom: 8px;
+}
+
+/* Roadmap */
+.stage-card {
+  background: rgba(255,255,255,0.05);
+  padding: 20px;
+  border-radius: 12px;
+  margin-top: 20px;
+  border: 1px solid var(--border);
+  transition: var(--transition);
+}
+
+.stage-card:hover {
+  background: rgba(255,255,255,0.1);
+  transform: translateY(-4px);
+}
+
+.stage-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.stage-icon {
+  font-size: 2rem;
+}
+
+.stage-title {
+  font-family: 'Fira Code', monospace;
+  color: var(--accent-purple);
+  font-size: 1.25rem;
+}
+
+/* Outcome Box */
+.outcome-box {
+  background: rgba(255,255,255,0.1);
+  padding: 12px;
+  border-radius: 8px;
+  margin: 12px 0;
+}
+
+.outcome-box h4 {
+  color: var(--accent-green);
+  margin-bottom: 6px;
+}
+
+/* Table */
+.table-container {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+thead {
+  background: rgba(255,255,255,0.1);
+}
+
+th, td {
+  padding: 12px 15px;
+  text-align: left;
+}
+
+th {
+  color: var(--accent-cyan);
+  font-family: 'Fira Code', monospace;
+}
+
+td {
+  color: #ccc;
+}
+
+/* Video */
+.large-video {
+  width: 100%;
+  height: 480px;
+  border-radius: 12px;
+  border: none;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+}
+
+@media (max-width: 850px) {
+  .large-video {
+    height: 300px;
+  }
+}
+
+/* Contract Portal */
+.grid2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+}
+
+.grid2 iframe {
+  width: 100%;
+  height: 320px;
+  border-radius: 12px;
+  border: none;
+}
+
+@media (max-width: 850px) {
+  .grid2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Lists & Text */
+.marec-list {
+  list-style: none;
+  margin: 10px 0 15px;
+}
+
+.marec-list li {
+  margin-bottom: 6px;
+}
+
+.marec-list li span {
+  font-family: 'Fira Code', monospace;
+  color: var(--accent-cyan);
+  margin-right: 6px;
+}
+
+.section-heading {
+  font-family: 'Fira Code', monospace;
+  font-size: 1rem;
+  color: var(--accent-cyan);
+  margin-bottom: 8px;
+}
+
+.subtext {
+  opacity: 0.85;
+}
+
+.muted {
+  opacity: 0.8;
+  font-size: 0.95rem;
+}
+
+.dim {
+  opacity: 0.7;
+}
+
+.mono {
+  font-family: 'Fira Code', monospace;
+}
+
+.silver {
+  color: #ccc;
+}
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  padding: 14px 25px;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  margin-top: 10px;
+  transition: var(--transition);
+}
+
+.btn:hover { opacity: 0.8; }
+
+.btn-cta { background: var(--accent-cyan); color: #fff; }
+.btn-steel { background: #555; color: #fff; }
+.btn-teal { background: #00bfae; color: #fff; }
+
+/* Reveal Animations */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: 0.8s ease;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-step {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: 0.9s ease;
+}
+
+.reveal-step.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 20px;
+  font-size: 0.9rem;
+  opacity: 0.7;
+}
