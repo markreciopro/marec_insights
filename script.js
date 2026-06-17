@@ -7,7 +7,7 @@
    TYPEWRITER EFFECT
    ------------------------------------------------------------ */
 (function () {
- const PHRASES = [
+ const PHRASES = [ 
   "Strategic Planning",
   "Strategic Data Architect",
   "Business Analytics Consultant",
