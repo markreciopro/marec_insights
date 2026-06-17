@@ -8,8 +8,8 @@
    ------------------------------------------------------------ */
 (function () {
  const PHRASES = [
-  "Strategic Planning"
-   "Strategic Data Architect",
+  "Strategic Planning",
+  "Strategic Data Architect",
   "Business Analytics Consultant",
   "Data Science Specialist",
   "Management Consulting Partner",
