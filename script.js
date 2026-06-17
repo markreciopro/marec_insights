@@ -7,13 +7,17 @@
    TYPEWRITER EFFECT
    ------------------------------------------------------------ */
 (function () {
-  const PHRASES = [
-    "Strategic Data Architect",
-    "Workforce Intelligence Partner",
-    "Power BI  ·  Python  ·  R  ·  SQL",
-    "HR Analytics Consultant",
-    "Mission‑Focused Analytics"
-  ];
+ const PHRASES = [
+  "Strategic Data Architect",
+  "Business Analytics Consultant",
+  "Data Science Specialist",
+  "Management Consulting Partner",
+  "Workforce Intelligence Partner",
+  "Power BI  ·  Python  ·  R  ·  SQL",
+  "MECE  ·  Root Cause  ·  Hypothesis‑Driven",
+  "HR Analytics Consultant",
+  "Mission‑Focused Analytics"
+];
 
   const el = document.getElementById("typewriter");
   if (!el) return;
