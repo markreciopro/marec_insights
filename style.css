@@ -508,3 +508,22 @@ summary:focus-visible { outline: 2px solid var(--lb-gold); outline-offset: 3px; 
 .founder-links .portfolio-list a { color: var(--lb-text-main); text-decoration: underline; text-decoration-color: var(--lb-turquoise-glow); text-underline-offset: 3px; }
 .founder-links .portfolio-list a:hover { color: var(--lb-gold); }
 @media print { .proof-strip { display: none; } }
+
+/* ==========================================================================
+   CRISP LAYOUT: collapsible detail, chips, static work grid
+   ========================================================================== */
+.more-box { background: var(--lb-azure-light); border: 1px solid var(--lb-border); border-radius: 8px; }
+details.more-box.pilot-box { padding: 0; }
+details.more-box > summary { cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 14px 18px; font-size: 0.95rem; font-weight: 600; color: var(--lb-text-main); }
+details.more-box > summary::-webkit-details-marker { display: none; }
+details.more-box > summary::after { content: "+"; color: var(--lb-gold); font-size: 1.2rem; font-weight: 700; line-height: 1; }
+details.more-box[open] > summary::after { content: "\2212"; }
+details.more-box > *:not(summary) { margin: 0 18px 16px; }
+details.more-box.cred-box { margin-top: 14px; }
+.chip-list { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+.chip-list li { padding: 7px 12px; border: 1px solid var(--lb-border); border-radius: 999px; background: var(--lb-azure-light); font-size: 0.82rem; color: var(--lb-text-main); }
+.chip-gold li { border-color: rgba(244, 185, 66, 0.5); color: var(--lb-gold); }
+.work-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+@media (min-width: 768px) { .work-grid { grid-template-columns: 1fr 1fr; } }
+.work-grid .proj-card { width: auto; }
+.work-grid .proj-card .muted { font-size: 0.85rem; }
