@@ -400,6 +400,6 @@
 
     if (hit) hit.addEventListener('click', chirp);
 
-    setTimeout(function () { say('Revenue up, operation cost down. That is the goal.', 3800); }, reduce ? 600 : 3000);
+    setTimeout(function () { say('Revenue up, labor down. That is the goal.', 3800); }, reduce ? 600 : 3000);
   });
 })();
