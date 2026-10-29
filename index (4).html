@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hospitality Analytics, Las Vegas | MAREC Insights</title>
+  <meta name="description" content="Hospitality analytics for hotels, resorts, casinos, and events: labor forecasting, cost control, revenue and GOPPAR analysis, and dashboards. Las Vegas and remote.">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <meta name="author" content="Mark Anthony Recio">
+  <meta name="theme-color" content="#0F2537">
+  <link rel="canonical" href="https://marec.site/">
+
+  <!-- Open Graph / social preview -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Hospitality Analytics, Las Vegas | MAREC Insights">
+  <meta property="og:description" content="Hospitality analytics for hotels, resorts, casinos, and events: labor forecasting, cost control, revenue and GOPPAR analysis, and dashboards. Las Vegas and remote.">
+  <meta property="og:url" content="https://marec.site/">
+  <meta property="og:image" content="https://github.com/markreciopro/marec_insights/blob/main/Gemini_Generated_Image_2r8hcu2r8hcu2r8h.jpg?raw=true">
+  <meta property="og:site_name" content="MAREC Insights">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:image:alt" content="MAREC Insights analytics workspace with resort performance dashboards">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Hospitality Analytics, Las Vegas | MAREC Insights">
+  <meta name="twitter:description" content="Hospitality analytics for hotels, resorts, casinos, and events: labor forecasting, cost control, revenue and GOPPAR analysis, and dashboards. Las Vegas and remote.">
+  <meta name="twitter:image" content="https://github.com/markreciopro/marec_insights/blob/main/Gemini_Generated_Image_2r8hcu2r8hcu2r8h.jpg?raw=true">
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230F2537'/%3E%3Ctext x='32' y='43' font-family='Georgia,serif' font-size='30' font-weight='700' fill='%23F4B942' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Fira+Code:wght@400;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css">
+
+  <!-- Structured data -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://marec.site/#website",
+      "url": "https://marec.site/",
+      "name": "MAREC Insights",
+      "publisher": {
+        "@id": "https://marec.site/#org"
+      },
+      "inLanguage": "en-US"
+    },
+    {
+      "@type": "ProfessionalService",
+      "@id": "https://marec.site/#org",
+      "name": "MAREC Insights",
+      "url": "https://marec.site/",
+      "description": "Hospitality analytics for hotels, resorts, casinos, and event operators, including workforce and labor analytics, revenue and GOPPAR analysis, executive dashboards, and AI governance, delivered with a consulting approach.",
+      "image": "https://github.com/markreciopro/marec_insights/blob/main/Gemini_Generated_Image_2r8hcu2r8hcu2r8h.jpg?raw=true",
+      "telephone": "+1-702-763-2573",
+      "email": "mark.recio@marec.site",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Las Vegas",
+        "addressRegion": "NV",
+        "addressCountry": "US"
+      },
+      "areaServed": [
+        {
+          "@type": "City",
+          "name": "Las Vegas"
+        },
+        {
+          "@type": "Country",
+          "name": "United States"
+        },
+        "Remote engagements for properties anywhere"
+      ],
+      "founder": {
+        "@id": "https://marec.site/#mark"
+      },
+      "knowsAbout": [
+        "Hospitality analytics",
+        "Data analytics",
+        "Business analytics",
+        "Management consulting",
+        "Workforce and labor analytics",
+        "Labor forecasting",
+        "Event and banquet staffing",
+        "GOPPAR and revenue analysis",
+        "Change management",
+        "AI governance",
+        "Hospitality consulting"
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Analytics and consulting services",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Hospitality Analytics"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Workforce & Labor Analytics"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Data Analytics & BI"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Business Analytics & Profit Strategy"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Management Consulting & Execution"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "AI Stack Governance"
+            }
+          }
+        ]
+      },
+      "sameAs": [
+        "https://www.linkedin.com/in/marecio/",
+        "https://markreciopro.github.io/Portfolio/"
+      ]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://marec.site/#mark",
+      "name": "Mark Anthony Recio",
+      "honorificSuffix": "MBA",
+      "jobTitle": "Founder and Principal Hospitality Analytics Consultant",
+      "worksFor": {
+        "@id": "https://marec.site/#org"
+      },
+      "alumniOf": [
+        {
+          "@type": "EducationalOrganization",
+          "name": "Keller Graduate School of Management"
+        },
+        {
+          "@type": "EducationalOrganization",
+          "name": "University of Denver"
+        },
+        {
+          "@type": "EducationalOrganization",
+          "name": "DeVry University"
+        }
+      ],
+      "hasCredential": [
+        {
+          "@type": "EducationalOccupationalCredential",
+          "name": "Microsoft Power BI Data Analyst Associate"
+        },
+        {
+          "@type": "EducationalOccupationalCredential",
+          "name": "Tableau Business Intelligence Analyst"
+        },
+        {
+          "@type": "EducationalOccupationalCredential",
+          "name": "Google Data Analytics"
+        },
+        {
+          "@type": "EducationalOccupationalCredential",
+          "name": "IBM Data Science Professional Certificate"
+        },
+        {
+          "@type": "EducationalOccupationalCredential",
+          "name": "HRCI Human Resources Associate"
+        }
+      ],
+      "sameAs": [
+        "https://www.linkedin.com/in/marecio/"
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://marec.site/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is hospitality analytics?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Hospitality analytics uses a property's own data, such as bookings, revenue, payroll, and scheduling, to guide decisions. Typical uses are demand and labor forecasting, labor cost control, revenue and GOPPAR analysis, and executive dashboards."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What KPIs do hospitality analytics dashboards track?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Common measures include labor cost, overtime hours, productivity, turnover, and recruiting, alongside RevPAR and GOPPAR, shown by department, property, or event. The exact set is agreed with your general manager and finance team."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What data do I need to start hospitality analytics?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Most projects start with exports you already have: PMS or revenue reports, payroll and timekeeping, schedules, and event or banquet booking data. A data readiness audit confirms what is usable before any modeling begins."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is hospitality consulting?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Hospitality consulting is expert advice that helps hotels, resorts, casinos, and event venues improve operations and profit. At MAREC Insights it combines analytics with a consulting approach: diagnose the problem, model it on your own data, and support the rollout."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you only work with large casino resorts?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Las Vegas casino resorts are a core market, but the work also fits hotels, boutique and island resorts, convention and event venues, and hospitality staffing firms. Remote engagements are available for properties outside Las Vegas."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What does a hospitality analytics consultant do?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A hospitality analytics consultant turns operating data into decisions. For resorts, casinos, hotels, and event venues that means forecasting demand and staffing needs, finding labor cost leakage such as overtime, linking labor to revenue and GOPPAR, and building dashboards that general managers and finance leaders can act on."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How can analytics reduce labor costs at a casino resort or hotel?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Analytics matches staffing to forecast demand by department and shift, shows where overtime and idle hours accumulate, and checks schedules against union and work rules before they are published. Because labor is viewed next to revenue, cost cuts do not quietly hurt service or sales. In earlier operations work, analysis of scheduling patterns and labor utilization helped reduce operating expenses by 15% for service and event crews."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the 30-day pilot?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The pilot has three steps: a 20-minute alignment call to scope margin goals, a data and AI readiness audit, and a 30-day action model and rollout blueprint built on your own data. A quarterly labor-efficiency review can follow so results stay tracked."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How is my property data protected?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sensitive exports such as PMS, payroll, and revenue files are cleaned and stripped of personal identifiers locally. Safe synthetic versions are used for cloud and AI modeling, and the resulting code runs on your real data behind your own firewall. Work is delivered under NDA and within IT-compliant architecture."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you work with properties outside Las Vegas?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Las Vegas is the core market, especially for union and large-resort work. Independent and boutique island or destination resorts with strong seasonality can work remotely, using booking-pace forecasting, staffing scenarios, and a labor efficiency ratio."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which tools and methods do you use?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "SQL and PostgreSQL for validation and reconciliation, Python and R for forecasting and statistical analysis, Power BI for executive dashboards (Tableau when a client requires it), and advanced Excel modeling."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can you validate an AI scheduling or forecasting tool?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. A validation covers a backtest against your own historical actuals, a work-rule check for union agreements and overtime thresholds, edge cases such as conventions and holidays, a fairness review of how hours are spread across staff, and drift monitoring after go-live."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How are engagements structured and priced?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Engagements can be a 30-day pilot, a project, a contract, fractional analytics support, or white-label deliverables for consultancies and staffing firms. Pricing can be a fixed fee or tied to measured savings, and is set on the scoping call."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Product",
+      "name": "Hospitality Analytics Manuscript",
+      "description": "Multi-module publication on hospitality analytics frameworks, revenue methodologies, and workforce deployment intelligence.",
+      "brand": {
+        "@type": "Brand",
+        "name": "MAREC Insights"
+      },
+      "url": "https://markreciopro.github.io/Manuscript/",
+      "offers": {
+        "@type": "Offer",
+        "price": "49.99",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "url": "https://markreciopro.github.io/Manuscript/"
+      }
+    }
+  ]
+}
+  </script>
+  
+  <noscript><style>.reveal,.reveal-step{opacity:1;transform:none}</style></noscript>
+</head>
+<body>
+  <a href="#hero" class="skip-link mono">Skip to content</a>
+  <div class="resort-bg-glow" aria-hidden="true"></div>
+
+  <!-- NAVIGATION HEADER -->
+  <nav class="nav-header" aria-label="Primary">
+    <div class="nav-container">
+      <a href="#hero" class="nav-brand mono">MAREC <span class="gold-accent">INSIGHTS</span></a>
+      <button type="button" class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navTabs">
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+        <span class="sr-only">Menu</span>
+      </button>
+      <div class="nav-tabs" id="navTabs">
+        <a href="#about" class="nav-link mono">About</a>
+        <a href="#services" class="nav-link mono">Services</a>
+        <a href="#outlook" class="nav-link mono">Outlook</a>
+        <a href="#portfolio" class="nav-link mono">Portfolio</a>
+        <a href="#research" class="nav-link mono">Research</a>
+        <a href="#partners" class="nav-link mono">Partners</a>
+        <a href="#faq" class="nav-link mono">FAQ</a>
+        <a href="#contact" class="nav-link mono">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- PRIMARY PAGE WRAPPER -->
+  <main class="page-wrap">
+
+    <!-- HERO SECTION -->
+    <header id="hero" class="hero">
+      <div class="hero-text-block">
+        <p class="eyebrow mono">Mark Recio, MBA &middot; Founder, MAREC Insights</p>
+        <h1 class="hero-title">Hospitality Analytics <span class="title-sub">Las Vegas</span></h1>
+        <p class="hero-sub mono">Workforce &amp; Labor Analytics &middot; Revenue &amp; GOPPAR Analytics &middot; Executive Dashboards</p>
+        <p id="typewriter" class="mono" aria-hidden="true"></p>
+        <p class="hero-tagline">
+          Hospitality analytics for hotels, resorts, casinos, and event operators. Forecast staffing demand, find labor cost leaks, and tie labor to revenue and GOPPAR, with dashboards your leaders can act on. Delivered with a consulting approach, from diagnosis through rollout. Based in Las Vegas, with remote engagements for properties anywhere.
+        </p>
+        <div class="cta-row">
+          <a href="#contact" class="btn btn-primary">Schedule Consultation</a>
+          <a href="#report" class="btn btn-ghost">Get the report</a>
+          <a href="#portfolio" class="btn btn-ghost">Explore live demos</a>
+          <a href="#manuscript" class="btn btn-ghost btn-price">Get the Manuscript &middot; $49.99</a>
+        </div>
+        <ul class="pillars" aria-label="Core capabilities">
+          <li><a href="#services"><strong>Hospitality analytics</strong><span>RevPAR, F&amp;B, gaming yield, demand</span></a></li>
+          <li><a href="#services"><strong>Workforce &amp; labor analytics</strong><span>Forecasting, overtime, staffing curves</span></a></li>
+          <li><a href="#services"><strong>Revenue &amp; GOPPAR analytics</strong><span>Labor, margin, and NOI decisions</span></a></li>
+          <li><a href="#services"><strong>Dashboards &amp; BI</strong><span>SQL, Power BI, validated data</span></a></li>
+        </ul>
+        <p class="trust-line mono">7+ years in hospitality analytics and operations &middot; MBA &middot; Microsoft Power BI Data Analyst Associate &middot; Tableau BI Analyst</p>
+      </div>
+      <figure class="hero-visual reveal-step">
+        <img
+          src="https://github.com/markreciopro/marec_insights/blob/main/Gemini_Generated_Image_2r8hcu2r8hcu2r8h.jpg?raw=true"
+          alt="MAREC Insights analytics workspace with resort performance dashboards"
+          width="1736" height="906"
+          loading="eager" fetchpriority="high" decoding="async">
+        <figcaption class="hero-visual-caption mono">MAREC Insights &middot; Resort Strategy Studio</figcaption>
+      </figure>
+    </header>
+
+    <!-- AT A GLANCE (answer-first summary for search and AI engines) -->
+    <section id="at-a-glance" class="card reveal" aria-labelledby="glanceTitle">
+      <p class="eyebrow mono">Quick facts</p>
+      <h2 class="card-title" id="glanceTitle">MAREC Insights at a <span class="turquoise">glance</span></h2>
+      <p class="description-text">MAREC Insights is a hospitality analytics practice in Las Vegas, Nevada, founded by Mark Anthony Recio, MBA. It helps hotels, resorts, casinos, and event operators forecast staffing demand, control labor cost, and connect labor decisions to revenue, with a consulting approach through rollout.</p>
+      <dl class="fact-grid">
+        <div><dt>Based in</dt><dd>Las Vegas, Nevada, with remote engagements for properties anywhere</dd></div>
+        <div><dt>Works with</dt><dd>Hotels, resorts, casinos, convention and event venues, hospitality staffing firms</dd></div>
+        <div><dt>Core work</dt><dd>Hospitality analytics: workforce and labor forecasting, labor cost optimization, revenue and GOPPAR analysis, executive dashboards</dd></div>
+        <div><dt>Tools</dt><dd>SQL, Python, R, Power BI, Tableau, advanced Excel</dd></div>
+        <div><dt>Engagements</dt><dd>30-day pilot, project-based, contract, fractional, and white-label analytics</dd></div>
+        <div><dt>Contact</dt><dd><a href="mailto:mark.recio@marec.site">mark.recio@marec.site</a> &middot; <a href="tel:+17027632573">(702) 763&#8209;2573</a></dd></div>
+      </dl>
+    </section>
+
+    <!-- TAB 1: ABOUT & FUTURE-PROOF PHILOSOPHY -->
+    <section id="about" class="card reveal">
+      <p class="eyebrow mono">Advisory philosophy</p>
+      <h2 class="card-title">Analytics that lead to <span class="turquoise">decisions &amp; execution</span></h2>
+      <div class="two-col">
+        <div>
+          <p class="body-muted description-text">
+            Led by <strong>Mark Anthony Recio, MBA</strong>, MAREC Insights is a hospitality analytics and management consulting practice. We combine data analytics and business analytics with a consulting approach: define the problem, build the model on your own property data, and support the rollout. Software can generate charts, but it cannot navigate union agreements, department head politics, or high-stakes operational transitions. We translate complex data into accountable, profitable action.
+          </p>
+          <div class="mission-banner">
+            <p class="mission-statement">
+              &ldquo;Tools are commodities; operational judgment, trust, and flawless execution are the true competitive moats in hospitality.&rdquo;
+            </p>
+          </div>
+          <p class="name-note mono">The name MAREC comes from <strong>M</strong>ark <strong>A</strong>nthony <strong>REC</strong>io.</p>
+          <div class="cred-box">
+            <p class="col-label mono">Credentials &amp; experience</p>
+            <ul class="cred-list">
+              <li>7+ years in business analytics and operations for hospitality and event staffing</li>
+              <li>MBA, Keller Graduate School of Management; Graduate Certificate in Strategic Innovation &amp; Change, University of Denver; B.S. Technical Management, DeVry University</li>
+              <li>Microsoft Power BI Data Analyst Associate; Tableau Business Intelligence Analyst; Google Data Analytics; IBM Data Science Professional Certificate</li>
+              <li>HRCI Human Resources Associate; Nevada HR &amp; Payroll Certification; University of Illinois analytics coursework</li>
+            </ul>
+          </div>
+        </div>
+        <div>
+          <div class="competency-card-group">
+            <div class="comp-item"><strong class="comp-title">Data &amp; Business Analytics</strong><p class="body-muted sm">SQL, Python, and Power BI models built on your own property data, translated into decisions for GMs and finance leaders.</p></div>
+            <div class="comp-item"><strong class="comp-title">Revenue &amp; Labor in One View</strong><p class="body-muted sm">Linking staffing decisions to demand, rate, and guest outcomes, so cost cuts do not hurt revenue.</p></div>
+            <div class="comp-item"><strong class="comp-title">Labor Economics &amp; Unions</strong><p class="body-muted sm">Navigating collective bargaining, penalty pay, and work rules.</p></div>
+            <div class="comp-item"><strong class="comp-title">AI Governance &amp; Validation</strong><p class="body-muted sm">Auditing and guarding automated scheduling recommendations.</p></div>
+            <div class="comp-item"><strong class="comp-title">Management Consulting &amp; Change</strong><p class="body-muted sm">Guiding GMs and department heads from diagnosis through successful rollout.</p></div>
+            <div class="comp-item"><strong class="comp-title">Total Profit Optimization</strong><p class="body-muted sm">Balancing net operating income (NOI) with guest service standards.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 2: SERVICES & ADVISORY ROADMAP -->
+    <section id="services" class="card reveal">
+      <p class="eyebrow mono">High-value advisory &amp; execution</p>
+      <h2 class="card-title">Analytics &amp; consulting <span class="turquoise">services</span></h2>
+      <div class="service-grid mt-24">
+        <div class="service-card"><span class="badge" aria-hidden="true">HA</span><h3 class="comp-title">Hospitality Analytics</h3><p class="body-muted sm">RevPAR, F&amp;B, and gaming yield analysis tied to demand, rate, and guest outcomes.</p></div>
+        <div class="service-card"><span class="badge" aria-hidden="true">WF</span><h3 class="comp-title">Workforce &amp; Labor Analytics</h3><p class="body-muted sm">Overtime leakage, staffing curves &amp; HR analytics (turnover, productivity).</p></div>
+        <div class="service-card"><span class="badge" aria-hidden="true">DA</span><h3 class="comp-title">Data Analytics &amp; BI</h3><p class="body-muted sm">SQL / PostgreSQL validation and reconciliation, with Power BI executive dashboards.</p></div>
+        <div class="service-card"><span class="badge" aria-hidden="true">BA</span><h3 class="comp-title">Business Analytics &amp; Profit Strategy</h3><p class="body-muted sm">Total profit strategy and NOI planning, plus anonymized resort efficiency benchmarks with participating properties.</p></div>
+        <div class="service-card"><span class="badge" aria-hidden="true">MC</span><h3 class="comp-title">Management Consulting &amp; Execution</h3><p class="body-muted sm">Change management, training department heads for adoption, and hands-on rollout with accountability.</p></div>
+        <div class="service-card"><span class="badge" aria-hidden="true">AG</span><h3 class="comp-title">AI Stack Governance</h3><p class="body-muted sm">Validating automated PMS &amp; scheduling models.</p></div>
+      </div>
+
+      <div class="pilot-box mt-24">
+        <h3 class="stage-name">Consulting approach: a low-risk 30-day pilot</h3>
+        <ol class="pilot-steps">
+          <li><strong>20-minute alignment call</strong> &mdash; scoping margin goals</li>
+          <li><strong>Data &amp; AI readiness audit</strong> &mdash; low friction</li>
+          <li><strong>30-day action model &amp; rollout blueprint</strong> &mdash; built on your own data</li>
+        </ol>
+        <p class="body-muted sm mt-24">After the pilot, a quarterly labor-efficiency review keeps results tracked and AI recommendations re-validated. Pricing can be a fixed pilot fee or tied to measured savings, and is set on the scoping call.</p>
+      </div>
+
+      <div class="pilot-box mt-24">
+        <h3 class="stage-name">How I validate an AI scheduling or forecasting recommendation</h3>
+        <ul class="manuscript-list mt-24">
+          <li><strong>Backtest</strong> against your own historical actuals, not vendor demo data</li>
+          <li><strong>Work-rule check</strong> for union agreements, penalty pay, and overtime thresholds</li>
+          <li><strong>Edge cases</strong> such as conventions, holidays, and sudden demand shifts</li>
+          <li><strong>Fairness review</strong> of how hours and shifts are spread across staff</li>
+          <li><strong>Drift monitoring</strong> so accuracy is rechecked after go-live</li>
+        </ul>
+      </div>
+      <div class="pilot-box mt-24">
+        <h3 class="stage-name">Island &amp; destination resorts: seasonal workforce planning</h3>
+        <p class="body-muted sm mt-24">Remote-friendly pilots for independent and boutique resorts with sharp seasonal swings. The Impression Isla Mujeres demo shows the approach: booking-pace forecasting, Monte Carlo staffing scenarios, and a labor efficiency ratio. Las Vegas remains the core market for union and large-resort engagements.</p>
+      </div>
+    </section>
+
+    <section id="use-cases" class="card reveal" aria-labelledby="useCasesTitle">
+      <p class="eyebrow mono">Who we help</p>
+      <h2 class="card-title" id="useCasesTitle">Hospitality problems MAREC <span class="turquoise">solves</span></h2>
+      <p class="body-muted description-text">For resort, casino, hotel, and event operators in Las Vegas and beyond. Each engagement starts from your own operating data.</p>
+      <div class="service-grid">
+        <div class="service-card"><h3 class="comp-title">Casino and resort labor cost control</h3><p class="body-muted sm">Find overtime leakage and over- or under-staffing by department, and tie labor spend to revenue and GOPPAR.</p></div>
+        <div class="service-card"><h3 class="comp-title">Banquet, convention, and event staffing</h3><p class="body-muted sm">Predictive labor-demand models for event-driven peaks, so crews match function sheets and attendance.</p></div>
+        <div class="service-card"><h3 class="comp-title">Housekeeping and front-of-house staffing</h3><p class="body-muted sm">Staffing models for rooms, front desk, and guest-facing teams that follow occupancy and arrival patterns.</p></div>
+        <div class="service-card"><h3 class="comp-title">Multi-property staffing benchmarks</h3><p class="body-muted sm">Compare productivity, labor cost, turnover, and recruiting across properties on one consistent basis.</p></div>
+        <div class="service-card"><h3 class="comp-title">Executive dashboards</h3><p class="body-muted sm">Power BI or Tableau views of staffing levels, labor cost, productivity, and turnover for GMs and finance leaders.</p></div>
+        <div class="service-card"><h3 class="comp-title">AI scheduling validation</h3><p class="body-muted sm">Backtest vendor or in-house scheduling and forecasting tools against your actuals and your work rules.</p></div>
+      </div>
+      <div class="pilot-box mt-24">
+        <h3 class="stage-name">Ways to work together</h3>
+        <ul class="manuscript-list mt-24">
+          <li><strong>30-day pilot</strong> for a defined labor or revenue question</li>
+          <li><strong>Project-based or contract</strong> analytics and dashboard builds</li>
+          <li><strong>Fractional support</strong> for teams without a full-time analyst</li>
+          <li><strong>White-label deliverables</strong> for consultancies and staffing firms serving hospitality clients</li>
+        </ul>
+        <div class="cta-row mt-24"><a href="#contact" class="btn btn-primary sm-btn">Schedule Consultation</a></div>
+      </div>
+    </section>
+
+    <section id="outlook" class="card reveal">
+      <p class="eyebrow mono">Where the work is heading</p>
+      <h2 class="card-title">Built for the <span class="turquoise">next 10 years</span></h2>
+      <p class="body-muted description-text">AI is making routine analysis cheap. MAREC's focus is the work that stays human: judgment, trust, and accountable results.</p>
+      <div class="outlook-grid">
+        <article class="outlook-card"><h3 class="comp-title">Now</h3><p class="body-muted sm">Hospitality, labor, and revenue analytics on real property data, with consulting support from diagnosis to adoption, including validation of AI scheduling and forecasting tools.</p></article>
+        <article class="outlook-card"><h3 class="comp-title">Next 3 years</h3><p class="body-muted sm">Recurring labor-efficiency reviews, anonymized benchmarks, and published research with university and industry partners.</p></article>
+        <article class="outlook-card"><h3 class="comp-title">Up to 10 years</h3><p class="body-muted sm">Oversight of AI agents that schedule, price, and forecast, with accountability for outcomes, labor-law fit, and fairness to staff.</p></article>
+      </div>
+    </section>
+
+    <!-- TAB 3: PORTFOLIO & INTERACTIVE APPS -->
+    <section id="portfolio" class="card reveal">
+      <p class="eyebrow mono">Live applications &amp; pipelines</p>
+      <h2 class="card-title">Interactive <span class="turquoise">portfolio hub</span></h2>
+      <div class="portfolio-grid">
+        <div class="portfolio-card">
+          <p class="col-label mono">Portfolio apps</p>
+          <h3 class="portfolio-title mono">MAREC Portfolio Hub</h3>
+          <p class="body-muted sm">Interactive BI dashboards, simulation tools, and yield calculators.</p>
+          <a href="https://markreciopro.github.io/Portfolio/" target="_blank" rel="noopener noreferrer" class="btn btn-primary sm-btn">Open live hub <span aria-hidden="true">&rarr;</span></a>
+        </div>
+        <div class="portfolio-card secondary">
+          <p class="col-label mono">How the work gets built</p>
+          <ul class="portfolio-list">
+            <li>SQL / PostgreSQL for data validation and reconciliation</li>
+            <li>Python for forecasting, statistical analysis, and backtesting (including checks on AI output)</li>
+            <li>Power BI executive dashboards (Tableau when a client requires it)</li>
+            <li>AI-assisted rapid prototyping, delivered in NDA and IT-compliant architecture</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- SENSITIVE DATA SECURITY & LOCAL SYNTHESIS ARCHITECTURE -->
+      <div class="app-guide-box mt-24">
+        <div class="app-guide-content">
+          <span class="proj-tag tag-featured">IP Protection &amp; Zero-Trust Data Pipeline</span>
+          <h3 class="stage-name mt-24">How MAREC Insights Protects Your Sensitive Property &amp; Intellectual Property</h3>
+          <p class="body-muted sm description-text">
+            Hospitality operators handle high-stakes intellectual property: exact casino drop figures, executive compensation schedules, guest booking lead times, and union labor agreements. Exposing raw property data to public cloud platforms or unmanaged AI chat models risks regulatory fines and trade secret leaks. MAREC Insights uses a local, air-gapped app pipeline to convert sensitive RAW data into mathematically safe SYNTHETIC data before engaging cloud tools or AI models.
+          </p>
+
+          <ol class="app-steps-list">
+            <li>
+              <strong>Step 1: Local Air-Gapped Data Ingestion (Cleaning &amp; PII Scrubbing)</strong>
+              <p class="sm body-muted">Your sensitive PMS exports, payroll CSVs, and revenue spreadsheets are loaded into a locally deployed app. The app cleans messy records while stripping away all personally identifiable information (PII), employee IDs, guest names, and contract details right on local hardware.</p>
+            </li>
+            <li>
+              <strong>Step 2: Differential Privacy Noise &amp; Synthetic Twin Creation</strong>
+              <p class="sm body-muted">To protect financial secrets and proprietary operational curves, the app synthesizes a "Safe Fake Twin" dataset (<code class="mono">SAFE_*.csv</code>). Differential privacy noise is applied to exact figures so revenue shapes, labor distributions, and seasonal ratios are strictly preserved for advanced modeling without revealing single actual value or confidential key performance indicator (KPI).</p>
+              <ul class="app-sub-list sm body-muted mt-24">
+                <li><strong>Public Clouds &amp; AI Chatboxes (ChatGPT / Gemini / Claude):</strong> Synthetic twin datasets are safely passed into cloud AI models to generate complex formulas, conduct exploratory code prompts, or build predictive algorithms with zero risk of IP exposure.</li>
+                <li><strong>Open-Source Tools (Python, R, SQL, Power BI):</strong> Developers and analysts build dashboards, machine learning pipelines, and yield algorithms against the safe synthetic schema without touching live production data.</li>
+              </ul>
+            </li>
+            <li>
+              <strong>Step 3: Re-Applying Insights to Raw Data Locally (The Master Blueprint)</strong>
+              <p class="sm body-muted">Once AI chat engines and open-source models solve the business challenge using synthetic data, the app generates execution scripts (SQL, Python, or R recipes) matched to your schema. These scripts run locally inside VS Code or Jupyter Notebooks against your real RAW data behind your firewall. Your live confidential data never leaves your property infrastructure.</p>
+            </li>
+          </ol>
+
+          <div class="summary-highlight">
+            <p class="sm"><strong>💡 In One Sentence:</strong> "MAREC Insights cleans your raw data locally, converts sensitive IP into safe synthetic twins for risk-free cloud and AI modeling, and executes the resulting code recipes locally on your real property data."</p>
+          </div>
+
+          <div class="cta-row mt-24">
+            <a href="https://raw.githubusercontent.com/markreciopro/marec_insights/main/docs/app.pdf" download="MAREC_Insights_Dataset_Guide.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-primary sm-btn">
+              📥 Download Enterprise Dataset &amp; Guide (PDF)
+            </a>
+          </div>
+        </div>
+
+        <figure class="app-guide-visual">
+          <img src="https://github.com/markreciopro/marec_insights/raw/main/Untitled%20design.png" alt="MAREC Insights Zero-Trust Data Architecture Diagram" loading="lazy">
+          <figcaption class="hero-visual-caption mono">MAREC Studio &middot; Local Security Architecture</figcaption>
+        </figure>
+      </div>
+
+      <div class="ecosystem-container mt-24">
+        <iframe src="https://markreciopro.github.io/MAREC-INSIGHTS-DATA-ECOSYSTEM-ANALYTICS-PIPELINE/" title="MAREC data ecosystem and analytics pipeline demo" allowfullscreen loading="lazy"></iframe>
+      </div>
+    </section>
+
+    <!-- TAB 4: RESEARCH (MANUSCRIPT & CASE STUDIES) -->
+    <section id="research" class="card reveal">
+      <p class="eyebrow mono">Thought leadership &amp; empirical proof</p>
+      <h2 class="card-title">Research &amp; <span class="turquoise">case studies</span></h2>
+
+      <div class="dna-card border-gold mt-24" id="report">
+        <span class="proj-tag tag-featured">Featured report</span>
+        <h3 class="stage-name mt-24">Luxury Resort Workforce Intelligence Report</h3>
+        <p class="body-muted sm description-text">MAREC Insights' report on workforce intelligence for luxury resorts. Download the PDF to read it.</p>
+        <div class="cta-row">
+          <a href="https://github.com/markreciopro/marec_insights/raw/main/Marec_Insights_Luxury_Resort_Workforce_Intelligence_Report..pdf" target="_blank" rel="noopener noreferrer" class="btn-outline sm-btn">Download PDF <span aria-hidden="true">↓</span></a>
+        </div>
+      </div>
+
+      <div id="manuscript" class="manuscript-feature" aria-labelledby="manuscriptTitle">
+        <div class="manuscript-copy">
+          <span class="proj-tag tag-featured">Featured publication</span>
+          <h3 class="manuscript-title" id="manuscriptTitle">Hospitality Analytics Manuscript</h3>
+          <p class="body-muted description-text">A complete multi-module publication, read online, for hospitality leaders who want the frameworks behind the numbers.</p>
+          <ul class="manuscript-list">
+            <li>Modern hospitality analytics frameworks</li>
+            <li>Revenue methodologies</li>
+            <li>Workforce deployment intelligence</li>
+          </ul>
+        </div>
+        <div class="manuscript-buy">
+          <p class="col-label mono">Manuscript access</p>
+          <p class="manuscript-price" aria-label="Price: 49 dollars and 99 cents">$49.99</p>
+          <a href="https://markreciopro.github.io/Manuscript/" target="_blank" rel="noopener noreferrer" class="btn btn-primary" id="manuscriptCta">Get the Manuscript <span aria-hidden="true">&rarr;</span></a>
+          <a href="#contact" class="btn btn-ghost" data-inquire="manuscript">Ask a question first</a>
+        </div>
+      </div>
+
+      <div class="mt-24">
+        <div class="dna-card border-teal">
+          <span class="proj-tag tag-analytics">Board Briefing PDF</span>
+          <h3 class="stage-name mt-24">Convention Revenue Leakage</h3>
+          <p class="body-muted sm description-text">
+            Quantitative loss recovery segmentation &amp; RICE scoring framework built for executive leadership at major convention hotels.
+          </p>
+          <a href="https://github.com/markreciopro/marec_insights/raw/main/MAREC_Convention_Revenue_Leakage_Board_Briefing.pdf" target="_blank" rel="noopener noreferrer" class="btn-outline sm-btn mt-24">Download Briefing PDF <span aria-hidden="true">↓</span></a>
+        </div>
+      </div>
+
+      <div class="marec-shiftboard mt-24">
+        <div class="marec-shiftboard-head mono"><span class="marec-shiftboard-dot" aria-hidden="true"></span> Live case study stream</div>
+        <div class="marec-shiftboard-track">
+          <div class="marec-shiftboard-list" id="projectLoopList">
+            <article class="proj-card border-gold">
+              <header class="proj-header"><h3 class="mono">Luxury Resort Workforce Intelligence Report</h3><span class="proj-tag tag-featured">Report PDF</span></header>
+              <p class="muted">Workforce intelligence for luxury resorts. Read online or download.</p>
+              <div class="cta-row mt-24">
+                <a href="https://github.com/markreciopro/marec_insights/raw/main/Marec_Insights_Luxury_Resort_Workforce_Intelligence_Report..pdf" target="_blank" rel="noopener noreferrer" class="btn-outline sm-btn">Download PDF <span aria-hidden="true">↓</span></a>
+              </div>
+            </article>
+            <article class="proj-card border-verified">
+              <header class="proj-header"><h3 class="mono">Palms Casino Resort</h3><span class="proj-tag tag-verified">Past · Present · Future PDF</span></header>
+              <p class="muted">Las Vegas workforce intelligence deep-dive document &amp; operational baseline analysis.</p>
+              <div class="cta-row mt-24">
+                <a href="https://github.com/markreciopro/marec_insights/raw/main/AFM_Workforce_Intelligence_Past_Present_Future%20(2).pdf" target="_blank" rel="noopener noreferrer" class="btn-outline sm-btn">Download PDF <span aria-hidden="true">↓</span></a>
+              </div>
+            </article>
+            <article class="proj-card border-teal">
+              <header class="proj-header"><h3 class="mono">Impression Isla Mujeres</h3><span class="proj-tag tag-analytics">Live demo</span></header>
+              <p class="muted">SQLite booking pace, Monte Carlo simulation &amp; Labor Efficiency Ratio app.</p>
+              <a href="https://markreciopro.github.io/impression_isla_mujeras/" target="_blank" rel="noopener noreferrer" class="btn-outline mt-24">Open demo <span aria-hidden="true">&rarr;</span></a>
+            </article>
+            <article class="proj-card border-gold">
+              <header class="proj-header"><h3 class="mono">Convention Revenue Leakage</h3><span class="proj-tag tag-featured">Board PDF</span></header>
+              <p class="muted">Quantitative loss recovery segmentation &amp; RICE framework for event venues.</p>
+              <a href="https://github.com/markreciopro/marec_insights/raw/main/MAREC_Convention_Revenue_Leakage_Board_Briefing.pdf" target="_blank" rel="noopener noreferrer" class="btn-outline mt-24">Open briefing PDF <span aria-hidden="true">&rarr;</span></a>
+            </article>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- TAB 5: PARTNERS & REGIONAL STEWARDSHIP -->
+    <section id="partners" class="card reveal">
+      <p class="eyebrow mono">Ecosystem &amp; conservation</p>
+      <h2 class="card-title">Strategic partners &amp; <span class="turquoise">advocacy</span></h2>
+
+      <div class="two-col mt-24">
+        <div class="dna-card border-verified">
+          <span class="proj-tag tag-verified">Confirmed partner</span>
+          <h3 class="stage-name mt-24">Synergy Staffing Solutions</h3>
+          <p class="body-muted sm description-text">
+            Led by <strong>Ken Arancibia</strong> (VP), supplying on-the-ground talent across hospitality, conventions, and admin&mdash;pairing MAREC analytics with active execution and rollout.
+          </p>
+          <a href="https://www.lvsynergy.com/" target="_blank" rel="noopener noreferrer" class="btn-outline sm-btn">Visit Synergy Staffing <span aria-hidden="true">&rarr;</span></a>
+        </div>
+
+        <div class="dna-card border-gold">
+          <span class="proj-tag tag-featured">Conservation Spotlight</span>
+          <h3 class="stage-name mt-24">World Parrot Trust (WPT)</h3>
+          <p class="body-muted sm description-text">
+            Supporting environmental stewardship across Caribbean island destinations by safeguarding native biodiversity, endemic species, and sustainable island tourism.
+          </p>
+          <a href="https://parrots.org/about-wpt/affiliates-partners-and-funders/" target="_blank" rel="noopener noreferrer" class="btn-outline sm-btn">Explore World Parrot Trust <span aria-hidden="true">&rarr;</span></a>
+        </div>
+      </div>
+
+      <div class="proposal-track mt-24">
+        <p class="col-label mono">In progress &mdash; research &amp; industry proposals</p>
+        <div class="competency-card-group">
+          <div class="comp-item border-pending"><span class="proj-tag tag-pending sm">Proposed</span><strong class="comp-title">HSMAI</strong><p class="body-muted sm">Hospitality Sales &amp; Marketing Association International &mdash; workforce intelligence alignment proposal.</p></div>
+          <div class="comp-item border-pending"><span class="proj-tag tag-in-discussion sm">In discussion</span><strong class="comp-title">UNLV</strong><p class="body-muted sm">University of Nevada, Las Vegas &mdash; hospitality research collaboration discussions.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" class="card reveal" aria-labelledby="faqTitle">
+      <p class="eyebrow mono">Common questions</p>
+      <h2 class="card-title" id="faqTitle">Hospitality analytics <span class="turquoise">FAQ</span></h2>
+      <div class="faq-list">
+        <details class="faq-item" open>
+          <summary>What is hospitality analytics?</summary>
+          <p>Hospitality analytics uses a property's own data, such as bookings, revenue, payroll, and scheduling, to guide decisions. Typical uses are demand and labor forecasting, labor cost control, revenue and GOPPAR analysis, and executive dashboards.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What KPIs do hospitality analytics dashboards track?</summary>
+          <p>Common measures include labor cost, overtime hours, productivity, turnover, and recruiting, alongside RevPAR and GOPPAR, shown by department, property, or event. The exact set is agreed with your general manager and finance team.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What data do I need to start hospitality analytics?</summary>
+          <p>Most projects start with exports you already have: PMS or revenue reports, payroll and timekeeping, schedules, and event or banquet booking data. A data readiness audit confirms what is usable before any modeling begins.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What is hospitality consulting?</summary>
+          <p>Hospitality consulting is expert advice that helps hotels, resorts, casinos, and event venues improve operations and profit. At MAREC Insights it combines analytics with a consulting approach: diagnose the problem, model it on your own data, and support the rollout.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Do you only work with large casino resorts?</summary>
+          <p>No. Las Vegas casino resorts are a core market, but the work also fits hotels, boutique and island resorts, convention and event venues, and hospitality staffing firms. Remote engagements are available for properties outside Las Vegas.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What does a hospitality analytics consultant do?</summary>
+          <p>A hospitality analytics consultant turns operating data into decisions. For resorts, casinos, hotels, and event venues that means forecasting demand and staffing needs, finding labor cost leakage such as overtime, linking labor to revenue and GOPPAR, and building dashboards that general managers and finance leaders can act on.</p>
+        </details>
+        <details class="faq-item">
+          <summary>How can analytics reduce labor costs at a casino resort or hotel?</summary>
+          <p>Analytics matches staffing to forecast demand by department and shift, shows where overtime and idle hours accumulate, and checks schedules against union and work rules before they are published. Because labor is viewed next to revenue, cost cuts do not quietly hurt service or sales. In earlier operations work, analysis of scheduling patterns and labor utilization helped reduce operating expenses by 15% for service and event crews.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What is the 30-day pilot?</summary>
+          <p>The pilot has three steps: a 20-minute alignment call to scope margin goals, a data and AI readiness audit, and a 30-day action model and rollout blueprint built on your own data. A quarterly labor-efficiency review can follow so results stay tracked.</p>
+        </details>
+        <details class="faq-item">
+          <summary>How is my property data protected?</summary>
+          <p>Sensitive exports such as PMS, payroll, and revenue files are cleaned and stripped of personal identifiers locally. Safe synthetic versions are used for cloud and AI modeling, and the resulting code runs on your real data behind your own firewall. Work is delivered under NDA and within IT-compliant architecture.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Do you work with properties outside Las Vegas?</summary>
+          <p>Las Vegas is the core market, especially for union and large-resort work. Independent and boutique island or destination resorts with strong seasonality can work remotely, using booking-pace forecasting, staffing scenarios, and a labor efficiency ratio.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Which tools and methods do you use?</summary>
+          <p>SQL and PostgreSQL for validation and reconciliation, Python and R for forecasting and statistical analysis, Power BI for executive dashboards (Tableau when a client requires it), and advanced Excel modeling.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can you validate an AI scheduling or forecasting tool?</summary>
+          <p>Yes. A validation covers a backtest against your own historical actuals, a work-rule check for union agreements and overtime thresholds, edge cases such as conventions and holidays, a fairness review of how hours are spread across staff, and drift monitoring after go-live.</p>
+        </details>
+        <details class="faq-item">
+          <summary>How are engagements structured and priced?</summary>
+          <p>Engagements can be a 30-day pilot, a project, a contract, fractional analytics support, or white-label deliverables for consultancies and staffing firms. Pricing can be a fixed fee or tied to measured savings, and is set on the scoping call.</p>
+        </details>
+      </div>
+    </section>
+
+    <!-- TAB 6: CONTACT & INQUIRY -->
+    <section id="contact" class="card reveal">
+      <p class="eyebrow mono">Get in touch</p>
+      <h2 class="card-title">Schedule an executive <span class="turquoise">consultation</span></h2>
+      <div class="contact-grid">
+        <div class="cf"><span class="cf-lbl mono">Name</span><strong class="cf-val">Mark Anthony Recio, MBA</strong></div>
+        <div class="cf"><span class="cf-lbl mono">Phone</span><a href="tel:+17027632573" class="cf-val">(702) 763&#8209;2573</a></div>
+        <div class="cf"><span class="cf-lbl mono">Email</span><a href="mailto:mark.recio@marec.site" class="cf-val">mark.recio@marec.site</a></div>
+        <div class="cf"><span class="cf-lbl mono">LinkedIn</span><a href="https://www.linkedin.com/in/marecio/" class="cf-val" target="_blank" rel="noopener noreferrer">linkedin.com/in/marecio</a></div>
+      </div>
+
+      <form id="inquiryForm" class="inquiry-card mt-24" action="https://formspree.io/f/meaqwyyo" method="POST" novalidate>
+        <input type="hidden" name="_subject" value="New MAREC Insights Inquiry">
+        <input type="hidden" name="lead_source" id="leadSource" value="direct">
+        <!-- honeypot field -->
+        <div class="hp-field" aria-hidden="true">
+          <label for="company">Company</label>
+          <input type="text" id="company" name="company" tabindex="-1" autocomplete="off">
+        </div>
+
+        <div class="inquiry-row">
+          <div class="inquiry-field">
+            <label for="visitor_name">Your name</label>
+            <input type="text" id="visitor_name" name="visitor_name" autocomplete="name" required>
+          </div>
+          <div class="inquiry-field">
+            <label for="visitor_email">Your email</label>
+            <input type="email" id="visitor_email" name="email" autocomplete="email" required>
+          </div>
+        </div>
+        <div class="inquiry-row">
+          <div class="inquiry-field">
+            <label for="exploring">Exploring</label>
+            <select id="exploring" name="exploring">
+              <option>30-Day Pilot Program</option>
+              <option>Hospitality or Business Analytics Project</option>
+              <option>Manuscript ($49.99)</option>
+              <option>AI Governance &amp; Implementation</option>
+              <option>Quarterly Labor-Efficiency Review</option>
+              <option>White-Label or Fractional Analytics Support</option>
+              <option>Partnership</option>
+            </select>
+          </div>
+          <div class="inquiry-field">
+            <label for="property_type">Property type</label>
+            <select id="property_type" name="property_type">
+              <option>Boutique Hotel</option>
+              <option>Luxury Resort</option>
+              <option>Casino/Venue</option>
+              <option>Event / Convention Operator</option>
+              <option>Staffing or Consulting Firm</option>
+              <option>Island / Destination Resort</option>
+            </select>
+          </div>
+        </div>
+        <div class="inquiry-field inquiry-field-full">
+          <label for="message">Notes</label>
+          <textarea id="message" name="message" rows="3" placeholder="Property, main goal, and timeline"></textarea>
+        </div>
+        <button type="submit" id="submitBtn" class="btn btn-primary">Send inquiry <span aria-hidden="true">&rarr;</span></button>
+        <p class="inquiry-note" id="formStatusMsg" role="status" aria-live="polite">Secure Formspree submission.</p>
+      </form>
+    </section>
+
+    <footer>
+      <nav class="footer-links mono" aria-label="Footer">
+        <a href="#services">Services</a><a href="#use-cases">Problems solved</a><a href="#research">Research</a><a href="#faq">FAQ</a><a href="#contact">Contact</a>
+      </nav>
+      <p class="mono">&copy; <span id="year">2026</span> MAREC Insights &middot; <span class="turquoise">Hospitality Analytics, Las Vegas, NV</span></p>
+    </footer>
+  </main>
+
+  <script src="./script.js"></script>
+</body>
+</html>
