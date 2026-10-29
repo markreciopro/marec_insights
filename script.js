@@ -103,9 +103,9 @@
   'use strict';
   const PHRASES = [
     'Hospitality Analytics for Hotels, Resorts & Casinos',
-    'Workforce & Labor Analytics for Las Vegas Resorts',
-    'Revenue & GOPPAR Analytics',
-    'Banquet & Event Staffing Analytics',
+    'Revenue Management Analytics',
+    'Workforce, Labor & HR Analytics',
+    'Banquet, Event & Convention Analytics',
     'Data Analytics & Executive Dashboards',
     'Business Analytics & Profit Strategy',
     'AI Governance & Validation',
