@@ -495,3 +495,16 @@ summary:focus-visible { outline: 2px solid var(--lb-gold); outline-offset: 3px; 
 .footer-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 18px; margin-bottom: 10px; font-size: 0.75rem; }
 .footer-links a { color: var(--lb-text-main); text-decoration: none; }
 .footer-links a:hover, .footer-links a:focus-visible { color: var(--lb-gold); }
+
+/* ==========================================================================
+   CREDIBILITY: proof strip + founder story
+   ========================================================================== */
+.proof-strip { display: grid; grid-template-columns: 1fr; gap: 12px; }
+@media (min-width: 640px) { .proof-strip { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1000px) { .proof-strip { grid-template-columns: repeat(4, 1fr); } }
+.proof-item { background: var(--lb-azure-light); border: 1px solid var(--lb-border); border-top: 3px solid var(--lb-gold); border-radius: 8px; padding: 16px 18px; display: flex; flex-direction: column; gap: 6px; }
+.proof-item strong { font-family: var(--font-serif); font-size: 1.6rem; line-height: 1.1; color: var(--lb-gold); }
+.proof-item span { font-size: 0.82rem; line-height: 1.45; color: var(--lb-text-muted); }
+.founder-links .portfolio-list a { color: var(--lb-text-main); text-decoration: underline; text-decoration-color: var(--lb-turquoise-glow); text-underline-offset: 3px; }
+.founder-links .portfolio-list a:hover { color: var(--lb-gold); }
+@media print { .proof-strip { display: none; } }
