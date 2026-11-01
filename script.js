@@ -1,5 +1,5 @@
 /* ==========================================================================
-   MAREC INSIGHTS — INTERACTIVE ENGINES SCRIPT (POLISHED)
+   MAREC INSIGHTS — INTERACTIVE SCRIPT (HR, PEOPLE ANALYTICS & CONSULTING)
    ========================================================================== */
 
 (function () {
@@ -238,6 +238,35 @@
     });
   });
 
+  /* ---------- CONSULTING TOOLKIT FILTER ---------- */
+  ready(function () {
+    var chips = document.querySelectorAll('.tool-chip');
+    var cards = document.querySelectorAll('.tool-card');
+    if (!chips.length || !cards.length) return;
+    chips.forEach(function (chip) {
+      chip.addEventListener('click', function () {
+        var f = chip.getAttribute('data-filter');
+        chips.forEach(function (c) { c.setAttribute('aria-pressed', String(c === chip)); });
+        cards.forEach(function (card) {
+          card.hidden = !(f === 'all' || card.getAttribute('data-cat') === f);
+        });
+      });
+    });
+  });
+
+  /* ---------- APPROACH LENS TOGGLE ---------- */
+  ready(function () {
+    var list = document.getElementById('approachList');
+    var chips = document.querySelectorAll('.lens-chip');
+    if (!list || !chips.length) return;
+    chips.forEach(function (chip) {
+      chip.addEventListener('click', function () {
+        list.setAttribute('data-lens', chip.getAttribute('data-lens'));
+        chips.forEach(function (c) { c.setAttribute('aria-pressed', String(c === chip)); });
+      });
+    });
+  });
+
   /* ---------- FOOTER YEAR ---------- */
   ready(function () {
     var y = document.getElementById('year');
@@ -291,9 +320,9 @@
     var bubble = document.getElementById('parrotBubble');
     var hit = document.getElementById('parrotHit');
     var LINES = [
-      'Forecast demand first.',
-      'Then match staffing to it.',
-      'Check the schedule against your work rules.',
+      'Start with the decision.',
+      'Pick the framework that fits the question.',
+      'Test the pattern before you act on it.',
       'Validate the AI before it goes live.',
       'Want to talk it through? Book a call.'
     ];
@@ -317,6 +346,6 @@
     }
 
     if (hit) hit.addEventListener('click', chirp);
-    setTimeout(function () { say('Right staff, right shift, right cost.', 3800); }, REDUCE ? 600 : 3000);
+    setTimeout(function () { say('Right data, right framework, right decision.', 3800); }, REDUCE ? 600 : 3000);
   });
 })();
