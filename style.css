@@ -477,29 +477,18 @@ details.more-box.cred-all > details.cred-acc { margin: 12px 18px 0; }
 }
 
 /* ==========================================================================
-   CONSULTING TOOLKIT, PROCESS OUTLINE & AI SAFETY (ADDED)
+   INTEGRATED APPROACH (HR ANALYTICS + PEOPLE ANALYTICS + CONSULTING)
    ========================================================================== */
 
-.tool-chip {
+.filter-chip {
   font: inherit; font-size: 0.82rem; font-weight: 500; color: var(--lb-text-main);
   background: var(--lb-azure-light); border: 1px solid var(--lb-border); border-radius: 999px;
   padding: 7px 14px; cursor: pointer; transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 }
-.tool-chip:hover { border-color: var(--lb-turquoise-glow); }
-.tool-chip[aria-pressed="true"] { background: var(--lb-turquoise-glow); border-color: var(--lb-turquoise-glow); color: #091520; font-weight: 700; }
-.tool-chip:focus-visible { outline: 2px solid var(--lb-gold); outline-offset: 2px; }
+.filter-chip:hover { border-color: var(--lb-turquoise-glow); }
+.filter-chip[aria-pressed="true"] { background: var(--lb-turquoise-glow); border-color: var(--lb-turquoise-glow); color: #091520; font-weight: 700; }
+.filter-chip:focus-visible { outline: 2px solid var(--lb-gold); outline-offset: 2px; }
 
-.tool-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
-@media (min-width: 640px) { .tool-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (min-width: 960px) { .tool-grid { grid-template-columns: repeat(3, 1fr); } }
-.tool-card {
-  background: var(--lb-azure-light); border: 1px solid var(--lb-border); border-left: 3px solid var(--lb-turquoise-glow);
-  border-radius: 8px; padding: 18px; display: flex; flex-direction: column; gap: 8px;
-}
-.tool-card[data-cat="prioritize"] { border-left-color: var(--lb-gold); }
-.tool-card[data-cat="strategy"] { border-left-color: var(--lb-sky); }
-.tool-card[data-cat="evidence"] { border-left-color: var(--lb-green); }
-.tool-cat { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.04em; color: var(--lb-text-muted); }
 
 
 @media print { .lens-intro { display: none; } }
@@ -533,7 +522,7 @@ details.more-box.cred-all > details.cred-acc { margin: 12px 18px 0; }
 .offer-note { font-size: 0.85rem; color: var(--lb-text-muted); margin-top: 16px; }
 
 /* ==========================================================================
-   POSITIONING: INDEPENDENT VALIDATION, COMPARISON & AI READINESS CHECK
+   POSITIONING: INDEPENDENT VALIDATION & COMPARISON
    ========================================================================== */
 
 .compare-grid { display: grid; grid-template-columns: 1fr; gap: 16px; margin-top: 24px; }
@@ -554,28 +543,3 @@ details.more-box.cred-all > details.cred-acc { margin: 12px 18px 0; }
 .stat-line { margin: 12px 0 16px; padding: 12px 16px; border-left: 3px solid var(--lb-gold); background: rgba(244, 185, 66, 0.08); border-radius: 0 8px 8px 0; max-width: 68ch; font-size: 0.92rem; }
 .stat-line strong { color: var(--lb-gold); font-size: 1.15rem; }
 .stat-line a { color: var(--lb-turquoise-glow); }
-
-.readiness { display: grid; gap: 14px; max-width: 760px; }
-.rq { border: 1px solid var(--lb-border); border-radius: 8px; padding: 14px 16px; background: var(--lb-azure-light); min-width: 0; }
-.rq legend { padding: 0 6px; font-size: 0.92rem; font-weight: 500; }
-.rq-options { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
-.rq-options label { position: relative; cursor: pointer; }
-.rq-options input { position: absolute; opacity: 0; inset: 0; width: 100%; height: 100%; margin: 0; cursor: pointer; }
-.rq-options span { display: inline-block; padding: 7px 14px; border: 1px solid var(--lb-border); border-radius: 999px; font-size: 0.84rem; background: var(--lb-azure); transition: background 0.2s ease, border-color 0.2s ease; }
-.rq-options input:hover + span { border-color: var(--lb-turquoise-glow); }
-.rq-options input:checked + span { background: var(--lb-turquoise-glow); border-color: var(--lb-turquoise-glow); color: #091520; font-weight: 700; }
-.rq-options input:focus-visible + span { outline: 2px solid var(--lb-gold); outline-offset: 2px; }
-.rq.is-missing { border-color: #E8803A; }
-
-.readiness-result { border: 2px solid var(--lb-border); border-radius: 10px; padding: 20px; background: var(--lb-azure-card); }
-.readiness-result[hidden] { display: none; }
-.readiness-result .verdict { font-size: 1.3rem; font-weight: 700; margin-bottom: 6px; }
-.readiness-result[data-verdict="go"] { border-color: var(--lb-green); }
-.readiness-result[data-verdict="go"] .verdict { color: var(--lb-green); }
-.readiness-result[data-verdict="fix"] { border-color: var(--lb-gold); }
-.readiness-result[data-verdict="fix"] .verdict { color: var(--lb-gold); }
-.readiness-result[data-verdict="hold"] { border-color: #E8803A; }
-.readiness-result[data-verdict="hold"] .verdict { color: #E8803A; }
-.readiness-result .check-list { margin-top: 12px; }
-
-@media print { .readiness { display: none; } }
