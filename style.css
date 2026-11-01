@@ -115,9 +115,6 @@ section[id], header[id] { scroll-margin-top: 96px; }
 .hero-tagline { font-size: 1.05rem; color: var(--lb-text-main); max-width: 640px; margin-bottom: 24px; line-height: 1.5; }
 .cta-row { display: flex; gap: 12px; flex-wrap: wrap; }
 
-.hero-visual { margin-top: 24px; border-radius: 12px; overflow: hidden; border: 1px solid var(--lb-border); box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.5); background: var(--lb-azure); }
-.hero-visual img { display: block; width: 100%; height: auto; }
-.hero-visual-caption { padding: 10px 14px; font-size: 0.68rem; letter-spacing: 0.05em; color: var(--lb-gold); background: var(--lb-azure); }
 
 .mission-banner { background: rgba(32, 178, 170, 0.12); border-left: 4px solid var(--lb-turquoise-glow); padding: 20px 24px; border-radius: 8px; margin-bottom: 16px; }
 .mission-statement { font-family: var(--font-serif); font-size: 1.1rem; color: var(--lb-text-main); line-height: 1.6; font-style: italic; }
@@ -483,7 +480,6 @@ details.more-box.cred-all > details.cred-acc { margin: 12px 18px 0; }
    CONSULTING TOOLKIT, PROCESS OUTLINE & AI SAFETY (ADDED)
    ========================================================================== */
 
-.tool-filter { display: flex; flex-wrap: wrap; gap: 8px; margin: 24px 0 16px; }
 .tool-chip {
   font: inherit; font-size: 0.82rem; font-weight: 500; color: var(--lb-text-main);
   background: var(--lb-azure-light); border: 1px solid var(--lb-border); border-radius: 999px;
@@ -503,11 +499,10 @@ details.more-box.cred-all > details.cred-acc { margin: 12px 18px 0; }
 .tool-card[data-cat="prioritize"] { border-left-color: var(--lb-gold); }
 .tool-card[data-cat="strategy"] { border-left-color: var(--lb-sky); }
 .tool-card[data-cat="evidence"] { border-left-color: var(--lb-green); }
-.tool-card[hidden] { display: none; }
 .tool-cat { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.04em; color: var(--lb-text-muted); }
 
 
-@media print { .tool-filter, .lens-intro { display: none; } .tool-card[hidden] { display: flex; } }
+@media print { .lens-intro { display: none; } }
 
 /* Integrated approach: HR analytics + people analytics + consulting */
 .lens-intro { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0 20px; }
