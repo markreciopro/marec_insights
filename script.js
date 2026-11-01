@@ -36,47 +36,6 @@
     window.addEventListener('resize', function () { if (window.innerWidth > 768) closeMenu(); }, { passive: true });
   });
 
-  /* ---------- ENDLESS INSIGHT STREAM (only if #projectLoopList exists) ---------- */
-  ready(function () {
-    var track = document.querySelector('.marec-shiftboard-track');
-    var list = document.getElementById('projectLoopList');
-    if (!track || !list || REDUCE) return;
-
-    Array.from(list.children).forEach(function (card) {
-      var clone = card.cloneNode(true);
-      clone.setAttribute('aria-hidden', 'true');
-      clone.querySelectorAll('[id]').forEach(function (el) { el.removeAttribute('id'); });
-      clone.querySelectorAll('a, button').forEach(function (el) { el.setAttribute('tabindex', '-1'); });
-      list.appendChild(clone);
-    });
-
-    var currentX = 0, isPaused = false, startTime = null;
-    var TARGET_SPEED = 0.65, RAMP_MS = 1400;
-
-    function frame(ts) {
-      if (startTime === null) startTime = ts;
-      if (!isPaused) {
-        var p = Math.min((ts - startTime) / RAMP_MS, 1);
-        currentX -= TARGET_SPEED * (1 - Math.pow(1 - p, 3));
-        var reset = list.scrollWidth / 2;
-        if (reset > 0 && Math.abs(currentX) >= reset) currentX += reset;
-        list.style.transform = 'translateX(' + currentX + 'px)';
-      }
-      requestAnimationFrame(frame);
-    }
-    function pause() { isPaused = true; }
-    function resume() { startTime = null; isPaused = false; }
-
-    document.addEventListener('visibilitychange', function () { document.hidden ? pause() : resume(); });
-    track.addEventListener('mouseenter', pause);
-    track.addEventListener('mouseleave', resume);
-    track.addEventListener('touchstart', pause, { passive: true });
-    track.addEventListener('touchend', resume, { passive: true });
-    list.addEventListener('focusin', pause);
-    list.addEventListener('focusout', resume);
-    requestAnimationFrame(frame);
-  });
-
   /* ---------- SCROLL REVEAL ---------- */
   (function () {
     function showAll() {
@@ -234,19 +193,6 @@
         for (var i = 0; i < select.options.length; i++) {
           if (select.options[i].text === want) { select.selectedIndex = i; break; }
         }
-      });
-    });
-  });
-
-  /* ---------- APPROACH LENS TOGGLE ---------- */
-  ready(function () {
-    var list = document.getElementById('approachList');
-    var chips = document.querySelectorAll('.lens-chip');
-    if (!list || !chips.length) return;
-    chips.forEach(function (chip) {
-      chip.addEventListener('click', function () {
-        list.setAttribute('data-lens', chip.getAttribute('data-lens'));
-        chips.forEach(function (c) { c.setAttribute('aria-pressed', String(c === chip)); });
       });
     });
   });
