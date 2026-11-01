@@ -1,5 +1,5 @@
 /* ==========================================================================
-   MAREC INSIGHTS — INTERACTIVE SCRIPT (HR, PEOPLE ANALYTICS & CONSULTING)
+   MAREC INSIGHTS — INTERACTIVE SCRIPT
    ========================================================================== */
 
 (function () {
@@ -248,73 +248,6 @@
         list.setAttribute('data-lens', chip.getAttribute('data-lens'));
         chips.forEach(function (c) { c.setAttribute('aria-pressed', String(c === chip)); });
       });
-    });
-  });
-
-  /* ---------- AI READINESS CHECK ---------- */
-  ready(function () {
-    var tool = document.getElementById('readinessTool');
-    if (!tool) return;
-    var sets = tool.querySelectorAll('.rq');
-    var btn = document.getElementById('readinessBtn');
-    var reset = document.getElementById('readinessReset');
-    var box = document.getElementById('readinessResult');
-    var verdictEl = document.getElementById('rrVerdict');
-    var textEl = document.getElementById('rrText');
-    var gapsEl = document.getElementById('rrGaps');
-    var cta = document.getElementById('readinessCta');
-    var summary = '';
-
-    var RESULTS = {
-      go:   { label: 'Go, with monitoring', text: 'The basics look covered. Keep checking accuracy and fairness on a schedule, and re-test after any vendor update.' },
-      fix:  { label: 'Fix before you rely on it', text: 'Some safeguards are in place, but there are gaps. Close them before the tool drives staffing, hiring or pay decisions.' },
-      hold: { label: 'Hold until it is validated', text: 'Too many safeguards are missing. Validate the tool on your own data and rules before anyone relies on it.' }
-    };
-
-    btn.addEventListener('click', function () {
-      var total = 0, gaps = [], missing = 0;
-      sets.forEach(function (fs) {
-        var picked = fs.querySelector('input:checked');
-        fs.classList.toggle('is-missing', !picked);
-        if (!picked) { missing++; return; }
-        var v = parseInt(picked.value, 10);
-        total += v;
-        if (v < 2) gaps.push(fs.getAttribute('data-label'));
-      });
-      if (missing) {
-        box.hidden = false;
-        box.removeAttribute('data-verdict');
-        verdictEl.textContent = 'Answer all six questions';
-        textEl.textContent = missing + ' unanswered. Choose Yes, Partly, or No for each one.';
-        gapsEl.innerHTML = '';
-        cta.hidden = true;
-        return;
-      }
-      cta.hidden = false;
-      var key = total >= 10 ? 'go' : (total >= 6 ? 'fix' : 'hold');
-      box.hidden = false;
-      box.setAttribute('data-verdict', key);
-      verdictEl.textContent = RESULTS[key].label + ' (' + total + ' of 12)';
-      textEl.textContent = RESULTS[key].text;
-      gapsEl.innerHTML = '';
-      gaps.forEach(function (g) {
-        var li = document.createElement('li');
-        li.textContent = g;
-        gapsEl.appendChild(li);
-      });
-      summary = 'AI readiness check: ' + RESULTS[key].label + ' (' + total + '/12).' + (gaps.length ? ' Gaps: ' + gaps.join(', ') + '.' : '');
-    });
-
-    reset.addEventListener('click', function () {
-      tool.querySelectorAll('input:checked').forEach(function (i) { i.checked = false; });
-      sets.forEach(function (fs) { fs.classList.remove('is-missing'); });
-      box.hidden = true;
-      summary = '';
-    });
-
-    cta.addEventListener('click', function () {
-      var msg = document.getElementById('message');
-      if (msg && summary) msg.value = summary + (msg.value && msg.value.indexOf(summary) === -1 ? '\n' + msg.value : '');
     });
   });
 
