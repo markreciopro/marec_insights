@@ -253,6 +253,9 @@ summary:focus-visible { outline: 2px solid var(--lb-gold); outline-offset: 3px; 
 .cred-name { font-size: 0.95rem; font-weight: 600; line-height: 1.35; color: var(--lb-text-main); }
 .cred-meta { font-size: 0.72rem; font-weight: 600; color: var(--cred-accent); margin-top: 2px; }
 .cred-detail { font-size: 0.8rem; line-height: 1.5; color: var(--lb-text-muted); margin-top: 4px; }
+.cred-featured { border-color: var(--cred-accent); box-shadow: 0 0 0 1px var(--cred-accent) inset; }
+.cred-link { display: inline-block; margin-top: 8px; font-size: 0.72rem; font-weight: 600; color: var(--cred-accent); text-decoration: none; border-bottom: 1px solid currentColor; padding-bottom: 1px; }
+.cred-link:hover, .cred-link:focus-visible { color: var(--lb-gold); }
 
 /* Credential groups reuse the site's click-to-view boxes */
 .cred-acc { margin-top: 12px; }
@@ -368,7 +371,7 @@ details.more-box.cred-all > details.cred-acc { margin: 12px 18px 0; }
   .reveal, .reveal-step { opacity: 1; transform: none; }
   .body-muted, .muted, .comp-title, .card-title, .hero-title { color: #000; }
   .cred-card { background: #fff; border-color: #ccc; break-inside: avoid; }
-  .cred-issuer, .cred-name, .cred-meta, .cred-detail { color: #000; }
+  .cred-issuer, .cred-name, .cred-meta, .cred-detail, .cred-link { color: #000; }
   .faq-item p { display: block; }
   .kw { color: #000 !important; }
 }
