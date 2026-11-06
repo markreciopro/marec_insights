@@ -1,223 +1,245 @@
-/* ==========================================================================
-   MAREC INSIGHTS — INTERACTIVE SCRIPT
-   ========================================================================== */
-
+/* MAREC Insights — site script. Drop-in replacement for script.js (v9). */
 (function () {
   'use strict';
 
-  var REDUCE = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
 
-  function ready(fn) {
-    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fn);
-    else fn();
+  /* ---------- Footer year ---------- */
+  var yr = $('#year');
+  if (yr) yr.textContent = new Date().getFullYear();
+
+  /* ---------- Mobile nav ---------- */
+  var navToggle = $('#navToggle');
+  var navTabs = $('#navTabs');
+  function setNav(open) {
+    if (!navToggle || !navTabs) return;
+    navTabs.classList.toggle('open', open);
+    navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
+  if (navToggle && navTabs) {
+    navToggle.addEventListener('click', function () {
+      setNav(!navTabs.classList.contains('open'));
+    });
+    $$('a', navTabs).forEach(function (a) {
+      a.addEventListener('click', function () { setNav(false); });
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') setNav(false);
+    });
   }
 
-  /* ---------- MOBILE NAV TOGGLE ---------- */
-  ready(function () {
-    var toggle = document.getElementById('navToggle');
-    var tabs = document.getElementById('navTabs');
-    if (!toggle || !tabs) return;
-
-    function closeMenu() {
-      tabs.classList.remove('open');
-      toggle.setAttribute('aria-expanded', 'false');
-    }
-
-    toggle.addEventListener('click', function () {
-      toggle.setAttribute('aria-expanded', String(tabs.classList.toggle('open')));
-    });
-    document.addEventListener('click', function (e) {
-      if (tabs.classList.contains('open') && !tabs.contains(e.target) && !toggle.contains(e.target)) closeMenu();
-    });
-    tabs.querySelectorAll('.nav-link').forEach(function (link) { link.addEventListener('click', closeMenu); });
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && tabs.classList.contains('open')) { closeMenu(); toggle.focus(); }
-    });
-    window.addEventListener('resize', function () { if (window.innerWidth > 768) closeMenu(); }, { passive: true });
-  });
-
-  /* ---------- SCROLL REVEAL ---------- */
-  (function () {
-    function showAll() {
-      document.querySelectorAll('.reveal, .reveal-step').forEach(function (el) { el.classList.add('visible'); });
-    }
-    if (REDUCE) { ready(showAll); return; }
-
-    if ('IntersectionObserver' in window) {
-      ready(function () {
-        var io = new IntersectionObserver(function (entries) {
-          entries.forEach(function (en) {
-            if (en.isIntersecting) { en.target.classList.add('visible'); io.unobserve(en.target); }
-          });
-        }, { rootMargin: '0px 0px -40px 0px', threshold: 0.02 });
-        document.querySelectorAll('.reveal, .reveal-step').forEach(function (el) { io.observe(el); });
+  /* ---------- Reveal on scroll ---------- */
+  var revealEls = $$('.reveal, .reveal-step');
+  if ('IntersectionObserver' in window && !reduceMotion) {
+    var ro = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { en.target.classList.add('visible'); ro.unobserve(en.target); }
       });
-    } else {
-      ready(showAll);
+    }, { threshold: 0.08, rootMargin: '0px 0px -5% 0px' });
+    revealEls.forEach(function (el) { ro.observe(el); });
+  } else {
+    revealEls.forEach(function (el) { el.classList.add('visible'); });
+  }
+
+  /* ---------- Active nav link ---------- */
+  var navLinks = $$('.nav-link');
+  var sections = navLinks.map(function (a) {
+    var id = (a.getAttribute('href') || '').replace('#', '');
+    return id ? document.getElementById(id) : null;
+  });
+  if ('IntersectionObserver' in window && navLinks.length) {
+    var active = null;
+    var so = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) active = en.target.id;
+      });
+      navLinks.forEach(function (a) {
+        if (a.getAttribute('href') === '#' + active) a.setAttribute('aria-current', 'true');
+        else a.removeAttribute('aria-current');
+      });
+    }, { rootMargin: '-35% 0px -55% 0px', threshold: 0 });
+    sections.forEach(function (s) { if (s) so.observe(s); });
+  }
+
+  /* ---------- Process phase highlight ---------- */
+  var phases = $$('#processList .approach-phase');
+  if (phases.length && 'IntersectionObserver' in window) {
+    var po = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) {
+          phases.forEach(function (p) { p.classList.toggle('is-active', p === en.target); });
+        }
+      });
+    }, { rootMargin: '-40% 0px -45% 0px', threshold: 0 });
+    phases.forEach(function (p) { po.observe(p); });
+  }
+
+  /* ---------- Hero: glass medallion (tilt + glare) ---------- */
+  var lens = $('#glassLens');
+  var stage = $('#glassStage');
+  var logo = $('#glassLogo');
+  var ghost = $('#glassGhost');
+  if (ghost && logo) {
+    var setGhost = function () { ghost.style.backgroundImage = 'url("' + logo.currentSrc + '")'; };
+    if (logo.complete) setGhost(); else logo.addEventListener('load', setGhost);
+  }
+  if (lens && stage && !reduceMotion) {
+    var raf = null;
+    var apply = function (tx, ty, rx, ry, gx, gy) {
+      lens.style.setProperty('--tx', tx + 'px');
+      lens.style.setProperty('--ty', ty + 'px');
+      lens.style.setProperty('--rx', rx + 'deg');
+      lens.style.setProperty('--ry', ry + 'deg');
+      lens.style.setProperty('--gx', gx + '%');
+      lens.style.setProperty('--gy', gy + '%');
+    };
+    var onMove = function (e) {
+      var r = stage.getBoundingClientRect();
+      var nx = ((e.clientX - r.left) / r.width) * 2 - 1;
+      var ny = ((e.clientY - r.top) / r.height) * 2 - 1;
+      nx = Math.max(-1.5, Math.min(1.5, nx));
+      ny = Math.max(-1.5, Math.min(1.5, ny));
+      if (raf) cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(function () {
+        apply((nx * 8).toFixed(2), (ny * 8).toFixed(2), (-ny * 9).toFixed(2), (nx * 9).toFixed(2),
+          (50 + nx * 30).toFixed(1), (40 + ny * 30).toFixed(1));
+      });
+    };
+    var reset = function () {
+      if (raf) cancelAnimationFrame(raf);
+      apply(0, 0, 0, 0, 30, 22);
+    };
+    window.addEventListener('pointermove', onMove, { passive: true });
+    document.addEventListener('pointerleave', reset);
+    window.addEventListener('blur', reset);
+  }
+
+  /* ---------- Hero: the parrot says "People, Planet, Profit" ---------- */
+  var say = $('#parrotSay');
+  var sayText = $('#sayText');
+  var sayLive = $('#sayLive');
+  var PHRASE = 'People, Planet, Profit';
+  var tblWords = $$('[data-tbl]');
+  var typeTimer = null;
+  var litTimers = [];
+
+  function clearLit() {
+    litTimers.forEach(clearTimeout);
+    litTimers = [];
+    tblWords.forEach(function (w) { w.classList.remove('is-lit'); });
+  }
+  function lightWords() {
+    clearLit();
+    if (reduceMotion) return;
+    tblWords.forEach(function (w, i) {
+      litTimers.push(setTimeout(function () {
+        tblWords.forEach(function (x) { x.classList.remove('is-lit'); });
+        w.classList.add('is-lit');
+      }, i * 700));
+    });
+    litTimers.push(setTimeout(function () {
+      tblWords.forEach(function (x) { x.classList.remove('is-lit'); });
+    }, tblWords.length * 700 + 400));
+  }
+  function speak(initial) {
+    if (!sayText) return;
+    clearInterval(typeTimer);
+    if (sayLive) sayLive.textContent = initial ? '' : PHRASE;
+    if (reduceMotion) {
+      sayText.textContent = PHRASE;
+      if (initial && sayLive) sayLive.textContent = PHRASE;
+      return;
     }
-  })();
+    sayText.textContent = '';
+    var i = 0;
+    typeTimer = setInterval(function () {
+      i += 1;
+      sayText.textContent = PHRASE.slice(0, i);
+      if (i >= PHRASE.length) {
+        clearInterval(typeTimer);
+        if (sayLive) sayLive.textContent = PHRASE;
+        lightWords();
+      }
+    }, 70);
+  }
+  if (say && sayText) {
+    // Wait for the bubble pop-in animation before typing.
+    setTimeout(function () { speak(true); }, reduceMotion ? 0 : 1500);
+    say.addEventListener('click', function () { clearLit(); speak(false); });
+  }
 
-  /* ---------- FORMSPREE AJAX SUBMISSION ---------- */
-  ready(function () {
-    var form = document.getElementById('inquiryForm');
-    if (!form) return;
+  /* ---------- CTA buttons preselect the "Exploring" dropdown ---------- */
+  var exploring = $('#exploring');
+  if (exploring) {
+    $$('[data-exploring]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var val = btn.getAttribute('data-exploring');
+        Array.prototype.forEach.call(exploring.options, function (o) {
+          if (o.text === val || o.value === val) exploring.value = o.value;
+        });
+      });
+    });
+  }
 
-    var submitBtn = document.getElementById('submitBtn');
-    var statusMsg = document.getElementById('formStatusMsg');
-    var honeypot = document.getElementById('company');
-    var defaultStatus = statusMsg ? statusMsg.textContent : '';
-    var resetTimer = null;
+  /* ---------- Lead source (UTM / referrer) ---------- */
+  var leadSource = $('#leadSource');
+  if (leadSource) {
+    try {
+      var p = new URLSearchParams(window.location.search);
+      var src = p.get('utm_source') || p.get('source') || p.get('ref');
+      if (!src && document.referrer) {
+        var host = new URL(document.referrer).hostname;
+        if (host && host !== window.location.hostname) src = host;
+      }
+      if (src) leadSource.value = src.slice(0, 80);
+    } catch (e) { /* keep default */ }
+  }
 
-    function setStatus(text, color) {
-      if (!statusMsg) return;
-      statusMsg.textContent = text;
-      statusMsg.style.color = color || '';
-    }
-
+  /* ---------- Inquiry form (Formspree, AJAX) ---------- */
+  var form = $('#inquiryForm');
+  var statusMsg = $('#formStatusMsg');
+  var submitBtn = $('#submitBtn');
+  if (form && statusMsg && submitBtn) {
+    var DEFAULT_MSG = statusMsg.textContent;
+    var btnHTML = submitBtn.innerHTML;
+    var say2 = function (msg, ok) {
+      statusMsg.textContent = msg;
+      statusMsg.style.color = ok === true ? '#4ADE80' : ok === false ? '#F87171' : '';
+    };
     form.addEventListener('submit', function (e) {
       e.preventDefault();
-
-      if (honeypot && honeypot.value) { form.reset(); return; }
-      if (!form.checkValidity()) { form.reportValidity(); return; }
-
-      var originalBtnHTML = submitBtn.innerHTML;
-      clearTimeout(resetTimer);
-      submitBtn.textContent = 'Sending inquiry…';
+      var hp = $('#company');
+      if (hp && hp.value) return; // honeypot: silently drop bots
+      var name = $('#visitor_name'), email = $('#visitor_email');
+      if (!name.value.trim()) { say2('Please enter your name.', false); name.focus(); return; }
+      if (!email.value.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) {
+        say2('Please enter a valid email address.', false); email.focus(); return;
+      }
       submitBtn.disabled = true;
-      setStatus('Sending…');
-
+      submitBtn.textContent = 'Sending…';
+      say2('Sending your inquiry…');
       fetch(form.action, {
         method: 'POST',
         body: new FormData(form),
         headers: { Accept: 'application/json' }
-      })
-        .then(function (response) {
-          if (!response.ok) {
-            return response.json().catch(function () { return {}; }).then(function (data) {
-              var msg = data && data.errors && data.errors.map(function (er) { return er.message; }).join(', ');
-              throw new Error(msg || 'Submission failed.');
-            });
-          }
+      }).then(function (res) {
+        if (res.ok) {
           form.reset();
-          submitBtn.textContent = 'Inquiry sent ✓';
-          submitBtn.style.backgroundColor = 'var(--lb-turquoise-glow)';
-          setStatus('Thank you — your message has been delivered to MAREC Insights.', '#34D399');
-          resetTimer = setTimeout(function () {
-            submitBtn.innerHTML = originalBtnHTML;
-            submitBtn.disabled = false;
-            submitBtn.style.backgroundColor = '';
-            setStatus(defaultStatus);
-          }, 6000);
-        })
-        .catch(function (error) {
-          console.error('Submission error:', error);
-          submitBtn.innerHTML = originalBtnHTML;
-          submitBtn.disabled = false;
-          setStatus('Submission failed. Email directly at mark.recio@marec.site.', '#E8803A');
-        });
-    });
-  });
-
-  /* ---------- ACTIVE SECTION HIGHLIGHT IN NAV ---------- */
-  ready(function () {
-    if (!('IntersectionObserver' in window)) return;
-    var links = document.querySelectorAll('.nav-link');
-    var byId = new Map();
-    links.forEach(function (l) {
-      var href = l.getAttribute('href') || '';
-      if (href.charAt(0) === '#') byId.set(href.slice(1), l);
-    });
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (en) {
-        if (!en.isIntersecting) return;
-        var active = byId.get(en.target.id);
-        if (!active) return;
-        links.forEach(function (l) { l.removeAttribute('aria-current'); });
-        active.setAttribute('aria-current', 'true');
-      });
-    }, { rootMargin: '-35% 0px -55% 0px' });
-    byId.forEach(function (l, id) {
-      var section = document.getElementById(id);
-      if (section) io.observe(section);
-    });
-  });
-
-  /* ---------- OPEN COLLAPSED DETAILS BEFORE PRINTING ---------- */
-  (function () {
-    var reopened = [];
-    window.addEventListener('beforeprint', function () {
-      reopened = [];
-      document.querySelectorAll('details:not([open])').forEach(function (d) {
-        d.setAttribute('open', '');
-        reopened.push(d);
-      });
-    });
-    window.addEventListener('afterprint', function () {
-      reopened.forEach(function (d) { d.removeAttribute('open'); });
-      reopened = [];
-    });
-  })();
-
-  /* ---------- OPEN COLLAPSED DETAILS WHEN A LINK POINTS INSIDE THEM ---------- */
-  ready(function () {
-    function openFor(el) {
-      var node = el;
-      while (node) {
-        if (node.tagName === 'DETAILS') node.open = true;
-        node = node.parentElement;
-      }
-    }
-    function handleHash() {
-      var id = window.location.hash.slice(1);
-      var target = id ? document.getElementById(id) : null;
-      if (target) openFor(target);
-    }
-    document.addEventListener('click', function (e) {
-      var link = e.target.closest ? e.target.closest('a[href^="#"]') : null;
-      if (!link) return;
-      var id = link.getAttribute('href').slice(1);
-      var target = id ? document.getElementById(id) : null;
-      if (target) openFor(target);
-    });
-    window.addEventListener('hashchange', handleHash);
-    handleHash();
-  });
-
-  /* ---------- PREFILL THE "EXPLORING" FIELD FROM CTA LINKS ---------- */
-  ready(function () {
-    var select = document.getElementById('exploring');
-    if (!select) return;
-    document.querySelectorAll('[data-exploring]').forEach(function (el) {
-      el.addEventListener('click', function () {
-        var want = el.getAttribute('data-exploring');
-        for (var i = 0; i < select.options.length; i++) {
-          if (select.options[i].text === want) { select.selectedIndex = i; break; }
+          say2('Thank you. Your inquiry was sent and Mark will reply shortly.', true);
+        } else {
+          return res.json().then(function (d) {
+            throw new Error((d && d.errors && d.errors.map(function (x) { return x.message; }).join(', ')) || 'Submission failed');
+          });
         }
+      }).catch(function () {
+        say2('Something went wrong. Please email mark.recio@marec.site directly.', false);
+      }).then(function () {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = btnHTML;
+        setTimeout(function () { if (statusMsg.style.color === '') statusMsg.textContent = DEFAULT_MSG; }, 100);
       });
     });
-  });
-
-  /* ---------- FOOTER YEAR ---------- */
-  ready(function () {
-    var y = document.getElementById('year');
-    if (y) y.textContent = new Date().getFullYear();
-  });
-
-  /* ---------- LEAD SOURCE CAPTURE ---------- */
-  ready(function () {
-    var field = document.getElementById('leadSource');
-    if (!field) return;
-    var parts = [];
-    try {
-      var q = new URLSearchParams(window.location.search);
-      ['utm_source', 'utm_medium', 'utm_campaign'].forEach(function (k) {
-        if (q.get(k)) parts.push(k + '=' + q.get(k).slice(0, 60));
-      });
-      if (document.referrer) {
-        var host = new URL(document.referrer).hostname;
-        if (host && host !== window.location.hostname) parts.push('referrer=' + host);
-      }
-    } catch (err) { /* keep default value */ }
-    if (parts.length) field.value = parts.join(' | ');
-  });
+  }
 })();
